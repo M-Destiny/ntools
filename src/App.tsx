@@ -40,6 +40,34 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Parse CSV data into a sortable, filterable table with pagination. Export as Markdown, JSON, or CSV.',
     category: 'Data',
     component: lazy(() => import('../tools/csv-to-table').then(m => ({ default: m.default })))
+  },
+  'regex-tester': {
+    name: 'regex-tester',
+    displayName: 'Regex Tester',
+    description: 'Test and debug regular expressions with live matching, syntax explanation, and examples.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/regex-tester').then(m => ({ default: m.default })))
+  },
+  'gradient-generator': {
+    name: 'gradient-generator',
+    displayName: 'Gradient Generator',
+    description: 'Create beautiful CSS gradients — linear, radial, and conic. Export ready-to-use CSS code.',
+    category: 'Design',
+    component: lazy(() => import('../tools/gradient-generator').then(m => ({ default: m.default })))
+  },
+  'unit-converter': {
+    name: 'unit-converter',
+    displayName: 'Unit Converter',
+    description: 'Convert between units across 10 categories — length, weight, temperature, volume, area, speed, time, data, pressure, energy.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/unit-converter').then(m => ({ default: m.default })))
+  },
+  'qr-code-generator': {
+    name: 'qr-code-generator',
+    displayName: 'QR Code Generator',
+    description: 'Generate QR codes for URLs, text, contacts, WiFi, and more. Customize colors, size, error correction, and add a logo.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/qr-code-generator').then(m => ({ default: m.default })))
   }
 };
 

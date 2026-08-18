@@ -256,7 +256,7 @@ export default function GradientGenerator() {
             <h4>Generated CSS</h4>
             <pre className="css-code"><code>{cssOutput}</code></pre>
             <p className="css-usage">
-              Usage: <code><div class="gradient"></div></code>
+              Usage: <code><div className="gradient"></div></code>
             </p>
           </div>
 
