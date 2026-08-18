@@ -19,13 +19,13 @@
     {
       "tool": "markdown-preview",
       "timestamp": "2026-08-18T17:30:00.000Z",
-      "commit": "pending",
+      "commit": "c8aa02c",
       "status": "built"
     },
     {
       "tool": "csv-to-table",
       "timestamp": "2026-08-18T17:30:00.000Z",
-      "commit": "pending",
+      "commit": "c8aa02c",
       "status": "built"
     }
   ]
