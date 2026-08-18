@@ -26,6 +26,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Format, validate, minify, and prettify JSON with syntax highlighting',
     category: 'Developer',
     component: lazy(() => import('../tools/json-formatter').then(m => ({ default: m.default })))
+  },
+  'markdown-preview': {
+    name: 'markdown-preview',
+    displayName: 'Markdown Preview',
+    description: 'Live markdown editor with real-time HTML preview, syntax highlighting, and export options',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-preview').then(m => ({ default: m.default })))
+  },
+  'csv-to-table': {
+    name: 'csv-to-table',
+    displayName: 'CSV to Table',
+    description: 'Parse CSV data into a sortable, filterable table with pagination. Export as Markdown, JSON, or CSV.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-table').then(m => ({ default: m.default })))
   }
 };
 
