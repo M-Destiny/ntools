@@ -13,7 +13,7 @@ export default function HTMLEntities() {
     '<': '<',
     '>': '>',
     '"': '"',
-    "'": ''',
+    "'": '&apos;',
     '/': '&#x2F;',
     '`': '&#x60;',
     '=': '&#x3D;',
@@ -338,12 +338,12 @@ export default function HTMLEntities() {
                     <tr><th>Char</th><th>Entity</th><th>Name</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>&</td><td><code>&amp;</code></td><td>Ampersand</td></tr>
-                    <tr><td><</td><td><code>&lt;</code></td><td>Less-than</td></tr>
-                    <tr><td>></td><td><code>&gt;</code></td><td>Greater-than</td></tr>
-                    <tr><td>"</td><td><code>"</code></td><td>Double quote</td></tr>
-                    <tr><td>'</td><td><code>'</code></td><td>Single quote</td></tr>
-                    <tr><td>/</td><td><code>&#x2F;</code></td><td>Forward slash</td></tr>
+                    <tr><td>{String.fromCharCode(38)}</td><td><code>{String.fromCharCode(38)}</code></td><td>Ampersand</td></tr>
+                    <tr><td>{String.fromCharCode(60)}</td><td><code>{String.fromCharCode(60)}</code></td><td>Less-than</td></tr>
+                    <tr><td>{String.fromCharCode(62)}</td><td><code>{String.fromCharCode(62)}</code></td><td>Greater-than</td></tr>
+                    <tr><td>{String.fromCharCode(34)}</td><td><code>{String.fromCharCode(34)}</code></td><td>Double quote</td></tr>
+                    <tr><td>{String.fromCharCode(39)}</td><td><code>&apos;</code></td><td>Single quote</td></tr>
+                    <tr><td>{String.fromCharCode(47)}</td><td><code>&#x2F;</code></td><td>Forward slash</td></tr>
                   </tbody>
                 </table>
 

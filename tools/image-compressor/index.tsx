@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 export default function ImageCompressor() {
   const [files, setFiles] = useState<File[]>([]);
@@ -166,7 +166,7 @@ export default function ImageCompressor() {
   };
 
   const downloadAll = () => {
-    results.forEach((result, index) => {
+    results.forEach((result, _index) => {
       if (result.compressedPreview) {
         const a = document.createElement('a');
         a.href = result.compressedPreview;
