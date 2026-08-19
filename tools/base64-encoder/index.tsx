@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Base64Encoder() {
   const [input, setInput] = useState('');
@@ -10,11 +10,12 @@ export default function Base64Encoder() {
   const [fileName, setFileName] = useState('');
   const [fileType, setFileType] = useState('');
 
-  const process = useMemo(() => {
+  // Compute output whenever input or mode changes
+  useEffect(() => {
     setError(null);
     try {
+      let result: string;
       if (mode === 'encode') {
-        // For text input, use TextEncoder for proper UTF-8 handling
         const encoder = new TextEncoder();
         const data = encoder.encode(input);
         let binary = '';
@@ -22,9 +23,8 @@ export default function Base64Encoder() {
         for (let i = 0; i < len; i++) {
           binary += String.fromCharCode(data[i]);
         }
-        return btoa(binary);
+        result = btoa(binary);
       } else {
-        // Decode base64
         const binary = atob(input.replace(/\s/g, ''));
         const len = binary.length;
         const bytes = new Uint8Array(len);
@@ -32,11 +32,12 @@ export default function Base64Encoder() {
           bytes[i] = binary.charCodeAt(i);
         }
         const decoder = new TextDecoder('utf-8', { fatal: true });
-        return decoder.decode(bytes);
+        result = decoder.decode(bytes);
       }
+      setOutput(result);
     } catch (e) {
       setError(mode === 'encode' ? 'Encoding failed' : 'Invalid Base64 input');
-      return '';
+      setOutput('');
     }
   }, [input, mode]);
 
