@@ -96,6 +96,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Decode, inspect, and verify JSON Web Tokens with header/payload inspection, signature verification, and timestamp humanization.',
     category: 'Developer',
     component: lazy(() => import('../tools/jwt-decoder').then(m => ({ default: m.default })))
+  },
+  'unix-timestamp': {
+    name: 'unix-timestamp',
+    displayName: 'Unix Timestamp Converter',
+    description: 'Convert between Unix timestamps (seconds/ms) and human-readable dates. Supports ISO 8601, RFC 2822, and custom formats.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/unix-timestamp').then(m => ({ default: m.default })))
+  },
+  'color-contrast': {
+    name: 'color-contrast',
+    displayName: 'Color Contrast Checker',
+    description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default })))
   }
 };
 
