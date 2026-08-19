@@ -110,6 +110,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
     category: 'Design',
     component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default })))
+  },
+  'password-generator': {
+    name: 'password-generator',
+    displayName: 'Password Generator',
+    description: 'Generate cryptographically secure passwords with customizable options. Uses Web Crypto API for true randomness.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/password-generator').then(m => ({ default: m.default })))
+  },
+  'qr-scanner': {
+    name: 'qr-scanner',
+    displayName: 'QR Code Scanner',
+    description: 'Scan QR codes using your camera or upload an image. Real-time scanning with Barcode Detection API.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/qr-scanner').then(m => ({ default: m.default })))
   }
 };
 
