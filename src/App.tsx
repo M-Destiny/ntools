@@ -68,6 +68,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Generate QR codes for URLs, text, contacts, WiFi, and more. Customize colors, size, error correction, and add a logo.',
     category: 'Utility',
     component: lazy(() => import('../tools/qr-code-generator').then(m => ({ default: m.default })))
+  },
+  'diff-checker': {
+    name: 'diff-checker',
+    displayName: 'Diff Checker',
+    description: 'Compare two text blocks and visualize differences with side-by-side or unified view. Line-by-line diff with syntax highlighting.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/diff-checker').then(m => ({ default: m.default })))
+  },
+  'base64-encoder': {
+    name: 'base64-encoder',
+    displayName: 'Base64 Encoder/Decoder',
+    description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default })))
   }
 };
 
