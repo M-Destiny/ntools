@@ -96,7 +96,7 @@ export default function CronBuilder() {
       setDescription(desc);
       
       // Calculate next 5 run times
-      const runs = calculateNextRuns(expr);
+      const runs = calculateNextRuns();
       setNextRuns(runs);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Invalid cron expression');
@@ -185,7 +185,7 @@ export default function CronBuilder() {
     return `Runs ${parts.join(', ')}`;
   };
 
-  const calculateNextRuns = (expr: string): string[] => {
+  const calculateNextRuns = (): string[] => {
     // Simplified next run calculation - just show next 5 occurrences approximately
     const runs: string[] = [];
     const now = new Date();
@@ -234,10 +234,6 @@ export default function CronBuilder() {
         dayOfWeek: parts[4],
       });
     }
-  };
-
-  const resetAll = () => {
-    setCron(DEFAULT_CRON);
   };
 
   return (

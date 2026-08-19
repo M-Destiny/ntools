@@ -139,8 +139,6 @@ export default function JWTDecoder() {
         }
       }
       
-      const alg = (parsed.header.alg as string) || 'none';
-      
       setDecoded({
         header: parsed.header,
         payload: parsed.payload,
@@ -227,7 +225,6 @@ export default function JWTDecoder() {
 
   const renderClaim = (key: string, value: unknown) => {
     const isStandard = key in STANDARD_CLAIMS;
-    const label = STANDARD_CLAIMS[key] || key;
     
     if ((key === 'exp' || key === 'iat' || key === 'nbf') && typeof value === 'number') {
       const dateStr = formatDate(value);
@@ -390,7 +387,7 @@ export default function JWTDecoder() {
                 <div className="sig-row">
                   <span className="sig-label">Algorithm</span>
                   <span className={`sig-value alg-badge ${KNOWN_ALGORITHMS.includes(((decoded.header.alg as string) || '').toUpperCase()) ? 'known' : 'unknown'}`}>
-                    {decoded.header.alg || 'none'}
+                    {String(decoded.header.alg || 'none')}
                   </span>
                 </div>
                 <div className="sig-row">
@@ -486,11 +483,11 @@ export default function JWTDecoder() {
                 </div>
                 <div className="info-item">
                   <span className="info-label">Algorithm</span>
-                  <span className="info-value">{decoded.header.alg || 'none'}</span>
+                  <span className="info-value">{String(decoded.header.alg || 'none')}</span>
                 </div>
                 <div className="info-item">
                   <span className="info-label">Token Type</span>
-                  <span className="info-value">{decoded.header.typ || 'JWT'}</span>
+                  <span className="info-value">{String(decoded.header.typ || 'JWT')}</span>
                 </div>
                 <div className="info-item">
                   <span className="info-label">Total Size</span>
@@ -519,7 +516,7 @@ export default function JWTDecoder() {
               <h4>Structure</h4>
               <p>A JWT consists of three parts separated by dots: <code>header.payload.signature</code></p>
               <ul>
-                <li><strong>Header</strong> — Algorithm and token type (e.g., <code>{{"alg":"HS256","typ":"JWT"}}</code>)</li>
+                <li><strong>Header</strong> — Algorithm and token type (e.g., <code>{'{\"alg\":\"HS256\",\"typ\":\"JWT\"}'}</code>)</li>
                 <li><strong>Payload</strong> — Claims (registered, public, private)</li>
                 <li><strong>Signature</strong> — Verifies token integrity</li>
               </ul>
