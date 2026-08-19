@@ -82,6 +82,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
     category: 'Utility',
     component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default })))
+  },
+  'cron-builder': {
+    name: 'cron-builder',
+    displayName: 'Cron Expression Builder',
+    description: 'Build and test cron expressions visually with field selectors, presets, human-readable descriptions, and next-run predictions.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/cron-builder').then(m => ({ default: m.default })))
+  },
+  'jwt-decoder': {
+    name: 'jwt-decoder',
+    displayName: 'JWT Decoder',
+    description: 'Decode, inspect, and verify JSON Web Tokens with header/payload inspection, signature verification, and timestamp humanization.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/jwt-decoder').then(m => ({ default: m.default })))
   }
 };
 
