@@ -138,6 +138,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Analyze text with comprehensive statistics: character/word counts, reading time, frequency analysis, and more.',
     category: 'Utility',
     component: lazy(() => import('../tools/text-statistics').then(m => ({ default: m.default })))
+  },
+  'lorem-ipsum-generator': {
+    name: 'lorem-ipsum-generator',
+    displayName: 'Lorem Ipsum Generator',
+    description: 'Generate placeholder text in paragraphs, words, sentences, or bytes. Optionally start with classic Lorem ipsum and wrap in HTML.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/lorem-ipsum-generator').then(m => ({ default: m.default })))
+  },
+  'meta-tag-generator': {
+    name: 'meta-tag-generator',
+    displayName: 'Meta Tag Generator',
+    description: 'Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and more. Export as HTML, JSON, or React Helmet code.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/meta-tag-generator').then(m => ({ default: m.default })))
   }
 };
 
