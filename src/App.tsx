@@ -124,6 +124,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Scan QR codes using your camera or upload an image. Real-time scanning with Barcode Detection API.',
     category: 'Utility',
     component: lazy(() => import('../tools/qr-scanner').then(m => ({ default: m.default })))
+  },
+  'number-base-converter': {
+    name: 'number-base-converter',
+    displayName: 'Number Base Converter',
+    description: 'Convert numbers between binary, octal, decimal, and hexadecimal with instant real-time conversion.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/number-base-converter').then(m => ({ default: m.default })))
+  },
+  'text-statistics': {
+    name: 'text-statistics',
+    displayName: 'Text Statistics',
+    description: 'Analyze text with comprehensive statistics: character/word counts, reading time, frequency analysis, and more.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/text-statistics').then(m => ({ default: m.default })))
   }
 };
 
