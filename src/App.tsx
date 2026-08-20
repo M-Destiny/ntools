@@ -194,6 +194,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Create complex box-shadow effects with multiple layers. Build subtle depth, neon glows, or brutalist shadows visually.',
     category: 'Design',
     component: lazy(() => import('../tools/css-shadow-generator').then(m => ({ default: m.default })))
+  },
+  'json-to-typescript': {
+    name: 'json-to-typescript',
+    displayName: 'JSON to TypeScript',
+    description: 'Convert JSON to TypeScript interfaces or type aliases with configurable options.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-to-typescript').then(m => ({ default: m.default })))
+  },
+  'html-to-markdown': {
+    name: 'html-to-markdown',
+    displayName: 'HTML to Markdown',
+    description: 'Convert HTML to clean Markdown with configurable output style. Supports headings, lists, tables, code blocks, and more.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/html-to-markdown').then(m => ({ default: m.default })))
   }
 };
 
