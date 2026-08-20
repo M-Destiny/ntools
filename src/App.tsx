@@ -152,6 +152,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Generate HTML meta tags for SEO, Open Graph, Twitter Cards, and more. Export as HTML, JSON, or React Helmet code.',
     category: 'Developer',
     component: lazy(() => import('../tools/meta-tag-generator').then(m => ({ default: m.default })))
+  },
+  'timezone-converter': {
+    name: 'timezone-converter',
+    displayName: 'Timezone Converter',
+    description: 'Convert dates and times between any timezones with live world clock and DST handling.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/timezone-converter').then(m => ({ default: m.default })))
+  },
+  'favicon-generator': {
+    name: 'favicon-generator',
+    displayName: 'Favicon Generator',
+    description: 'Generate favicon files in multiple sizes from a single image. Supports PNG, transparent backgrounds, and Apple touch icons.',
+    category: 'Design',
+    component: lazy(() => import('../tools/favicon-generator').then(m => ({ default: m.default })))
   }
 };
 
