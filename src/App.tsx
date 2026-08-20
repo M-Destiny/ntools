@@ -180,6 +180,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Break down regular expressions into plain English explanations with live matching, capture groups, and examples.',
     category: 'Developer',
     component: lazy(() => import('../tools/regex-explainer').then(m => ({ default: m.default })))
+  },
+  'json-validator': {
+    name: 'json-validator',
+    displayName: 'JSON Validator & Formatter',
+    description: 'Validate, format, and prettify JSON with syntax error detection and example templates.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-validator').then(m => ({ default: m.default })))
+  },
+  'css-shadow-generator': {
+    name: 'css-shadow-generator',
+    displayName: 'CSS Shadow Generator',
+    description: 'Create complex box-shadow effects with multiple layers. Build subtle depth, neon glows, or brutalist shadows visually.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-shadow-generator').then(m => ({ default: m.default })))
   }
 };
 
