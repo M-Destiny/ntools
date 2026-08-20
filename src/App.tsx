@@ -222,6 +222,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Generate harmonious color palettes from a base color using color theory. Export as CSS, Tailwind, SCSS, or JSON.',
     category: 'Design',
     component: lazy(() => import('../tools/color-scheme-generator').then(m => ({ default: m.default })))
+  },
+  'emoji-picker': {
+    name: 'emoji-picker',
+    displayName: 'Emoji Picker',
+    description: 'Browse, search, and copy 1800+ emojis across 9 categories with recent history and instant clipboard copy.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/emoji-picker').then(m => ({ default: m.default })))
+  },
+  'markdown-linter': {
+    name: 'markdown-linter',
+    displayName: 'Markdown Linter',
+    description: 'Lint Markdown with 15+ rules. Auto-fix trailing spaces, heading issues, formatting violations, and more.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-linter').then(m => ({ default: m.default })))
   }
 };
 
