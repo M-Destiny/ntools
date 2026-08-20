@@ -6,7 +6,6 @@ export default function Base64Decoder() {
   const [mode, setMode] = useState<'decode' | 'encode'>('decode');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [inputEncoding, setInputEncoding] = useState<'utf8' | 'base64'>('base64');
 
   const processData = () => {
     setError(null);

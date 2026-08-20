@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 type CaseType = 'lower' | 'upper' | 'title' | 'sentence' | 'camel' | 'pascal' | 'snake' | 'kebab' | 'constant' | 'dot' | 'path' | 'header' | 'capitalize';
 
@@ -91,16 +91,6 @@ export default function TextCaseConverter() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const copyAll = () => {
-    const allResults = CASE_OPTIONS.map(opt => ({
-      case: opt.label,
-      result: convertCase(input, opt.id)
-    }));
-    const text = allResults.map(r => `${r.case}: ${r.result}`).join('\n');
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const clearAll = () => {
     setInput('');

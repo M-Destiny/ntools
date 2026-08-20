@@ -255,7 +255,7 @@ export default function LoremIpsumGenerator() {
                 onChange={e => setOptions(prev => ({ ...prev, html: e.target.checked }))}
                 disabled={options.type !== 'paragraphs'}
               />
-              Wrap paragraphs in <p> tags
+              Wrap paragraphs in {'<p>'} tags
             </label>
           </div>
 
@@ -337,7 +337,7 @@ export default function LoremIpsumGenerator() {
             <h4>Options</h4>
             <ul>
               <li><strong>Start with "Lorem ipsum"</strong> — Ensures classic opening for recognition</li>
-              <li><strong>Wrap in <p> tags</strong> — Outputs valid HTML paragraphs (paragraphs mode only)</li>
+              <li><strong>Wrap in {'<p>'} tags</strong> — Outputs valid HTML paragraphs (paragraphs mode only)</li>
             </ul>
 
             <h4>Common Use Cases</h4>

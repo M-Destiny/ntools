@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default function MarkdownTableGenerator() {
   const [rows, setRows] = useState<number>(3);
@@ -11,9 +11,8 @@ export default function MarkdownTableGenerator() {
   ]);
   const [alignment, setAlignment] = useState<('left' | 'center' | 'right')[]>(['left', 'left', 'left']);
   const [copied, setCopied] = useState(false);
-  const [output, setOutput] = useState('');
-
-  const generateTable = useMemo(() => {
+  
+  const generateTable = () => {
     if (cols === 0 || rows === 0) return '';
     
     // Header row
@@ -29,7 +28,7 @@ export default function MarkdownTableGenerator() {
     ).join('\n');
     
     return headerRow + '\n' + alignRow + '\n' + dataRows;
-  }, [rows, cols, headers, data, alignment]);
+  };
 
   const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newRows = Math.max(1, Math.min(50, parseInt(e.target.value) || 1));
@@ -177,7 +176,7 @@ export default function MarkdownTableGenerator() {
 
           <div className="control-group">
             <button onClick={copyOutput} className={copied ? 'copied' : ''}>
-              {copied ? '✓ Copied!' : 'Copy Markdown'}
+              {copied ? 'Copied!' : 'Copy Markdown'}
             </button>
           </div>
         </div>
@@ -232,20 +231,20 @@ export default function MarkdownTableGenerator() {
             <h3>Markdown Output</h3>
             <div className="toolbar-actions">
               <button onClick={copyOutput} className={copied ? 'copied' : ''}>
-                {copied ? '✓ Copied!' : 'Copy'}
+                {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
           </div>
           <textarea
             className="json-editor output"
-            value={generateTable}
+            value={generateTable()}
             readOnly
             spellCheck={false}
           />
           <div className="preview-section">
             <h4>Preview</h4>
             <div className="markdown-preview">
-              {generateTable.split('\n').map((line, i) => (
+              {generateTable().split('\n').map((line, i) => (
                 <div key={i} style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>{line}</div>
               ))}
             </div>
