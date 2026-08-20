@@ -166,6 +166,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Generate favicon files in multiple sizes from a single image. Supports PNG, transparent backgrounds, and Apple touch icons.',
     category: 'Design',
     component: lazy(() => import('../tools/favicon-generator').then(m => ({ default: m.default })))
+  },
+  'code-formatter': {
+    name: 'code-formatter',
+    displayName: 'Code Formatter',
+    description: 'Beautify or minify JavaScript, TypeScript, JSON, CSS, HTML, Markdown, YAML, XML, SQL, and Python with configurable indentation.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/code-formatter').then(m => ({ default: m.default })))
+  },
+  'regex-explainer': {
+    name: 'regex-explainer',
+    displayName: 'Regex Explainer',
+    description: 'Break down regular expressions into plain English explanations with live matching, capture groups, and examples.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/regex-explainer').then(m => ({ default: m.default })))
   }
 };
 
