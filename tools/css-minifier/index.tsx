@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default function CSSMinifier() {
   const [input, setInput] = useState('');
@@ -34,7 +34,7 @@ export default function CSSMinifier() {
       result = result.replace(/#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3(?![0-9a-fA-F])/g, '#$1$2$3');
       
       // Remove units for zero values
-      result = result.replace(/(\d)(\.\d+)?(px|em|rem|%|vh|vw|pt|pc|in|cm|mm|ex|ch)/g, (match, num, dec, unit) => {
+      result = result.replace(/(\d)(\.\d+)?(px|em|rem|%|vh|vw|pt|pc|in|cm|mm|ex|ch)/g, (match, num, dec) => {
         if (parseFloat(num + (dec || '')) === 0) return '0';
         return match;
       });

@@ -77,7 +77,7 @@ export default function YamlFormatter() {
   };
 
   const stringifyYaml = (obj: any, currentIndent = 0): string => {
-    const spaces = ' '.repeat(currentIndent);
+    // const spaces = ' '.repeat(currentIndent);
     const nextIndent = currentIndent + indent;
     const nextSpaces = ' '.repeat(nextIndent);
     
@@ -199,7 +199,7 @@ metadata:
         <div className="toolbar-group">
           <button onClick={clearAll} className="btn-secondary">Clear</button>
           <button onClick={copyOutput} className={copied ? 'copied' : 'btn-secondary'}>
-            {copied ? '✓ Copied!' : 'Copy Output'}
+            {copied ? 'Copied!' : 'Copy Output'}
           </button>
           <button onClick={downloadOutput} className="btn-secondary">Download .yaml</button>
           <button onClick={loadExample} className="btn-secondary">Load Example</button>
@@ -224,7 +224,7 @@ metadata:
         </div>
       </div>
 
-      {error && <div className="error-banner">✗ {error}</div>}
+      {error && <div className="error-banner">Error: {error}</div>}
 
       <div className="yaml-layout">
         <div className="editor-pane">
@@ -260,7 +260,7 @@ metadata:
             <li>Use 2-space indentation (standard) or customize</li>
             <li>Keys are sorted alphabetically when enabled</li>
             <li>Strings with special chars are auto-quoted</li>
-            <li>Multi-line strings use | (literal) or > (folded) style</li>
+            <li>Multi-line strings use | (literal) or {'>'} (folded) style</li>
             <li>Boolean/null values are preserved as YAML types</li>
           </ul>
         </details>

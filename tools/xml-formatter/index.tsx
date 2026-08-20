@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function XmlFormatter() {
   const [input, setInput] = useState('');
@@ -9,11 +9,11 @@ export default function XmlFormatter() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const formatXml = useMemo(() => {
+  const formatXml = (): string => {
     if (!input.trim()) return '';
     
     setError(null);
-    
+
     try {
       const parser = new DOMParser();
       const doc = parser.parseFromString(input, 'application/xml');
@@ -36,7 +36,7 @@ export default function XmlFormatter() {
       // Split by tags
       const tags = xmlString.match(/<[^>]+>|[^<]+/g) || [];
       
-      tags.forEach((tag, index) => {
+      tags.forEach((tag) => {
         const isClosing = tag.startsWith('</');
         const isSelfClosing = tag.endsWith('/>') || (tag.startsWith('<') && tag.endsWith('>') && !isClosing && tag.includes(' ') && tag.trim().endsWith('/>'));
         const isDeclaration = tag.startsWith('<?');
@@ -53,11 +53,6 @@ export default function XmlFormatter() {
         } else {
           formatted += indentChar.repeat(currentIndent) + tag + '\n';
         }
-        
-        // Handle self-closing - don't increment for next
-        if (isSelfClosing && !isDeclaration && !isComment && !isCdata) {
-          // already handled
-        }
       });
       
       // Clean up extra whitespace in text nodes
@@ -65,7 +60,6 @@ export default function XmlFormatter() {
       
       // Re-parse to properly handle text nodes
       const doc2 = parser.parseFromString(formatted, 'application/xml');
-      const serializer2 = new XMLSerializer();
       let finalOutput = '';
       
       const formatNode = (node: Node, indent: number) => {
@@ -110,8 +104,9 @@ export default function XmlFormatter() {
       };
       
       formatNode(doc2.documentElement, 0);
-      setOutput(finalOutput.trim());
-      return finalOutput.trim();
+      const result = finalOutput.trim();
+      setOutput(result);
+      return result;
       
     } catch (e) {
       const err = e as Error;
@@ -119,6 +114,10 @@ export default function XmlFormatter() {
       setOutput('');
       return '';
     }
+  };
+
+  useEffect(() => {
+    formatXml();
   }, [input, indentSize, useTabs, sortAttributes]);
 
   const copyOutput = () => {

@@ -45,30 +45,29 @@ export default function UUIDGenerator() {
 
   // Generate UUID v7 (Unix timestamp-based, sortable)
   const generateV7 = useCallback((): string => {
-    const now = Date.now();
-    const unixTs = Math.floor(now / 1000);
-    const ms = now % 1000;
-    
-    const timeBytes = Buffer.alloc(6);
-    timeBytes.writeUInt32BE(unixTs, 0);
-    timeBytes.writeUInt16BE(ms, 4);
-    
-    const timeHex = timeBytes.toString('hex');
-    const timeLow = timeHex.slice(0, 8);
-    const timeMid = timeHex.slice(8, 12);
-    const timeHiAndVersion = (parseInt(timeHex.slice(12, 16), 16) & 0x0fff | 0x7000).toString(16).padStart(4, '0');
-    
-    const randomBytes = Buffer.alloc(10);
-    for (let i = 0; i < 10; i++) {
-      randomBytes[i] = (Math.random() * 256) | 0;
-    }
-    randomBytes[0] = (randomBytes[0] & 0x3f) | 0x80; // Set variant bits
-    
-    const clockSeq = randomBytes.slice(0, 2).toString('hex');
-    const node = randomBytes.slice(2).toString('hex');
-    
-    return `${timeLow}-${timeMid}-${timeHiAndVersion}-${clockSeq}-${node}`;
-  }, []);
+      const now = Date.now();
+      const unixTs = Math.floor(now / 1000);
+      const ms = now % 1000;
+
+      const timeBytes = new Uint8Array(6);
+      const view = new DataView(timeBytes.buffer);
+      view.setUint32(0, unixTs, false);
+      view.setUint16(4, ms, false);
+
+      const timeHex = Array.from(timeBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+      const timeLow = timeHex.slice(0, 8);
+      const timeMid = timeHex.slice(8, 12);
+      const timeHiAndVersion = (parseInt(timeHex.slice(12, 16), 16) & 0x0fff | 0x7000).toString(16).padStart(4, '0');
+
+      const randomBytes = new Uint8Array(10);
+      crypto.getRandomValues(randomBytes);
+      randomBytes[0] = (randomBytes[0] & 0x3f) | 0x80; // Set variant bits
+
+      const clockSeq = Array.from(randomBytes.slice(0, 2)).map(b => b.toString(16).padStart(2, '0')).join('');
+      const node = Array.from(randomBytes.slice(2)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      return `${timeLow}-${timeMid}-${timeHiAndVersion}-${clockSeq}-${node}`;
+    }, []);
 
   const generate = useCallback(() => {
     let generator: () => string;

@@ -2,11 +2,6 @@ import { useState } from 'react';
 
 type InputFormat = 'csv' | 'tsv' | 'json' | 'html' | 'excel';
 
-interface Column {
-  header: string;
-  align?: 'left' | 'center' | 'right';
-}
-
 export default function TableToMarkdown() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -16,7 +11,7 @@ export default function TableToMarkdown() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const parseCSV = (text: string, delim: string, header: boolean): string[][] => {
+  const parseCSV = (text: string, delim: string): string[][] => {
     const lines = text.trim().split('\n');
     const result: string[][] = [];
     
@@ -53,7 +48,7 @@ export default function TableToMarkdown() {
     return result;
   };
 
-  const parseTSV = (text: string): string[][] => parseCSV(text, '\t', true);
+  const parseTSV = (text: string): string[][] => parseCSV(text, '\t');
 
   const parseJSON = (text: string): string[][] => {
     const data = JSON.parse(text);
@@ -114,7 +109,7 @@ export default function TableToMarkdown() {
       
       switch (format) {
         case 'csv':
-          rows = parseCSV(input, delimiter, hasHeader);
+          rows = parseCSV(input, delimiter);
           break;
         case 'tsv':
           rows = parseTSV(input);

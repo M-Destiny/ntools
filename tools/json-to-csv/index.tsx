@@ -8,7 +8,6 @@ export default function JsonToCsv() {
   const [delimiter, setDelimiter] = useState(',');
   const [includeHeaders, setIncludeHeaders] = useState(true);
   const [flattenNested, setFlattenNested] = useState(true);
-  const [headerStyle, setHeaderStyle] = useState<'original' | 'dot' | 'bracket'>('dot');
 
   useEffect(() => {
     setError(null);
@@ -24,7 +23,7 @@ export default function JsonToCsv() {
       setError('Invalid JSON: ' + (e as Error).message);
       setOutput('');
     }
-  }, [input, delimiter, includeHeaders, flattenNested, headerStyle]);
+  }, [input, delimiter, includeHeaders, flattenNested]);
 
   const jsonToCsv = (data: any): string => {
     if (!Array.isArray(data)) {
@@ -34,7 +33,7 @@ export default function JsonToCsv() {
     if (data.length === 0) return '';
 
     // Flatten objects if enabled
-    const flattened = flattenNested ? data.map(item => flattenObject(item)) : data;
+    const flattened = flattenNested ? data.map((item: any) => flattenObject(item)) : data;
 
     // Get all unique keys
     const allKeys = new Set<string>();
@@ -48,7 +47,6 @@ export default function JsonToCsv() {
     
     // Generate header
     const header = keys.map(key => {
-      if (headerStyle === 'original') return escapeCsv(key);
       return escapeCsv(key);
     }).join(delimiter);
 
