@@ -208,6 +208,20 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     description: 'Convert HTML to clean Markdown with configurable output style. Supports headings, lists, tables, code blocks, and more.',
     category: 'Developer',
     component: lazy(() => import('../tools/html-to-markdown').then(m => ({ default: m.default })))
+  },
+  'css-animation-generator': {
+    name: 'css-animation-generator',
+    displayName: 'CSS Animation Generator',
+    description: 'Create custom CSS keyframe animations and transitions visually with 8 presets. Export production-ready CSS code.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-animation-generator').then(m => ({ default: m.default })))
+  },
+  'color-scheme-generator': {
+    name: 'color-scheme-generator',
+    displayName: 'Color Scheme Generator',
+    description: 'Generate harmonious color palettes from a base color using color theory. Export as CSS, Tailwind, SCSS, or JSON.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-scheme-generator').then(m => ({ default: m.default })))
   }
 };
 
