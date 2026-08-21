@@ -10,7 +10,7 @@ interface JsonPathResult {
 
 function jsonPath(obj: unknown, expr: string): JsonPathResult[] {
   const results: JsonPathResult[] = [];
-  
+
   function normalizePath(path: (string | number)[]): string {
     return '$' + path.map(p => typeof p === 'number' ? `[${p}]` : `.${p}`).join('');
   }

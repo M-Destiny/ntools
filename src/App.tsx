@@ -500,6 +500,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔌',
     shortcut: 'P'
   },
+  'html-minifier': {
+    name: 'html-minifier',
+    displayName: 'HTML Minifier',
+    description: 'Minify HTML by removing whitespace, comments, and optional attributes. Supports JS/CSS minification.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/html-minifier').then(m => ({ default: m.default }))),
+    icon: '📦',
+    shortcut: 'H'
+  },
+  'sql-formatter': {
+    name: 'sql-formatter',
+    displayName: 'SQL Formatter',
+    description: 'Format and beautify SQL queries with configurable indentation, keyword casing, and layout options.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/sql-formatter').then(m => ({ default: m.default }))),
+    icon: '🗃️',
+    shortcut: 'S'
+  },
 };
 
 // Derived data

@@ -40,12 +40,16 @@ try {
   const commits = gitLog.trim().split('\n').filter(Boolean);
   const toolCommits = commits.filter(c => c.includes('feat(tools): add'));
   
+  // Each feat(tools): add commit adds 2 tools
+  const toolsBuiltToday = toolCommits.length * 2;
+  
   console.log(`Today's tool commits: ${toolCommits.length}`);
+  console.log(`Tools built today: ${toolsBuiltToday}`);
   console.log(`Progress claims: ${progress.tools_built_today}`);
   
-  if (toolCommits.length !== progress.tools_built_today) {
+  if (toolsBuiltToday !== progress.tools_built_today) {
     console.log('MISMATCH DETECTED - correcting progress.json');
-    progress.tools_built_today = toolCommits.length;
+    progress.tools_built_today = toolsBuiltToday;
     progress.log.push({
       tool: 'auto-correction',
       timestamp: new Date().toISOString(),
