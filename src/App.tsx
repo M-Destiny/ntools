@@ -482,6 +482,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📡',
     shortcut: 'M'
   },
+  'http-status-codes': {
+    name: 'http-status-codes',
+    displayName: 'HTTP Status Codes',
+    description: 'Complete reference of HTTP status codes with search, filter, and copy functionality.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/http-status-codes').then(m => ({ default: m.default }))),
+    icon: '🌐',
+    shortcut: 'H'
+  },
+  'port-reference': {
+    name: 'port-reference',
+    displayName: 'Port Reference',
+    description: 'Complete reference of TCP/UDP port numbers with service names, descriptions, and category filtering.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/port-reference').then(m => ({ default: m.default }))),
+    icon: '🔌',
+    shortcut: 'P'
+  },
 };
 
 // Derived data
