@@ -23,6 +23,87 @@ const CATEGORY_CONFIG: Record<string, { color: string; bg: string; icon: React.R
 
 // Tool registry
 const TOOL_REGISTRY: Record<string, ToolMeta> = {
+  'color-palette-generator': {
+    name: 'color-palette-generator',
+    displayName: 'Color Palette Generator',
+    description: 'Generate harmonious color palettes from a base color using color theory. Export as CSS, Tailwind, SCSS, or JSON.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-palette-generator').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'P'
+  },
+  'color-blender': {
+    name: 'color-blender',
+    displayName: 'Color Blender',
+    description: 'Mix two colors, generate gradients, and create color scales with perceptual color spaces (OKLab, HSL, sRGB).',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-blender').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'B'
+  },
+  'aspect-ratio-calculator': {
+    name: 'aspect-ratio-calculator',
+    displayName: 'Aspect Ratio Calculator',
+    description: 'Calculate dimensions, convert ratios, and find matching resolutions with presets for common screen sizes.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/aspect-ratio-calculator').then(m => ({ default: m.default }))),
+    icon: '📐',
+    shortcut: 'A'
+  },
+  'css-flexbox-generator': {
+    name: 'css-flexbox-generator',
+    displayName: 'CSS Flexbox Generator',
+    description: 'Visual flexbox layout builder. Configure properties and copy the generated CSS with live preview.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-flexbox-generator').then(m => ({ default: m.default }))),
+    icon: '📦',
+    shortcut: 'F'
+  },
+  'css-grid-generator': {
+    name: 'css-grid-generator',
+    displayName: 'CSS Grid Generator',
+    description: 'Visual CSS Grid layout builder. Define columns, rows, gaps, and named grid areas. Copy the generated CSS.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-grid-generator').then(m => ({ default: m.default }))),
+    icon: '📐',
+    shortcut: 'G'
+  },
+  'gitignore-generator': {
+    name: 'gitignore-generator',
+    displayName: 'Gitignore Generator',
+    description: 'Generate .gitignore files by selecting from 30+ templates for languages, frameworks, IDEs, and OS.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/gitignore-generator').then(m => ({ default: m.default }))),
+    icon: '🚫',
+    shortcut: 'G'
+  },
+  'json-diff': {
+    name: 'json-diff',
+    displayName: 'JSON Diff',
+    description: 'Compare two JSON objects and visualize differences. Added (green), removed (red), changed (yellow).',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-diff').then(m => ({ default: m.default }))),
+    icon: '🔀',
+    shortcut: 'D'
+  },
+  'jsonpath-tester': {
+    name: 'jsonpath-tester',
+    displayName: 'JSONPath Tester',
+    description: 'Test JSONPath expressions against JSON data. Supports basic JSONPath syntax including wildcards, filters, and recursive descent.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/jsonpath-tester').then(m => ({ default: m.default }))),
+    icon: '🔍',
+    shortcut: 'J'
+  },
+  'regex-replace': {
+    name: 'regex-replace',
+    displayName: 'Regex Find & Replace',
+    description: 'Find and replace text using regular expressions. Supports capture groups in replacement ($1, $2, etc.).',
+    category: 'Developer',
+    component: lazy(() => import('../tools/regex-replace').then(m => ({ default: m.default }))),
+    icon: '🔍',
+    shortcut: 'R'
+  },
   'color-picker': {
     name: 'color-picker',
     displayName: 'Color Picker',
@@ -248,6 +329,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '✅',
     shortcut: 'V'
   },
+  'license-generator': {
+    name: 'license-generator',
+    displayName: 'License Generator',
+    description: 'Generate license files for your projects with popular open source licenses (MIT, Apache-2.0, GPL-3.0, BSD-3-Clause, ISC, Unlicense).',
+    category: 'Utility',
+    component: lazy(() => import('../tools/license-generator').then(m => ({ default: m.default }))),
+    icon: '📄',
+    shortcut: 'L'
+  },
   'css-shadow-generator': {
     name: 'css-shadow-generator',
     displayName: 'CSS Shadow Generator',
@@ -274,6 +364,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/html-to-markdown').then(m => ({ default: m.default }))),
     icon: '🔄',
     shortcut: 'H'
+  },
+  'markdown-to-html': {
+    name: 'markdown-to-html',
+    displayName: 'Markdown to HTML Converter',
+    description: 'Convert Markdown to clean HTML. Supports headers, lists, tables, code blocks, links, images, blockquotes, and more.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-to-html').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'M'
   },
   'css-animation-generator': {
     name: 'css-animation-generator',

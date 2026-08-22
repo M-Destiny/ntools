@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function RegexReplace() {
   const [input, setInput] = useState('');
@@ -10,21 +10,22 @@ export default function RegexReplace() {
   const [matchCount, setMatchCount] = useState(0);
   const [copied, setCopied] = useState(false);
 
-  const process = useMemo(() => {
+  useEffect(() => {
     setError(null);
     if (!pattern) {
       setMatchCount(0);
-      return input;
+      setOutput(input);
+      return;
     }
     try {
       const regex = new RegExp(pattern, flags);
       const matches = input.match(regex);
       setMatchCount(matches ? matches.length : 0);
-      return input.replace(regex, replacement);
+      setOutput(input.replace(regex, replacement));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Invalid regex pattern');
       setMatchCount(0);
-      return '';
+      setOutput('');
     }
   }, [input, pattern, replacement, flags]);
 
@@ -209,7 +210,7 @@ export default function RegexReplace() {
                     <tr><td><code>$`</code></td><td>Text before the match</td></tr>
                     <tr><td><code>$'</code></td><td>Text after the match</td></tr>
                     <tr><td><code>$n</code></td><td>nth capture group (1-99)</td></tr>
-                    <tr><td><code>$<n></code></td><td>Named capture group</td></tr>
+                    <tr><td><code>{'$' + '<n>'}</code></td><td>Named capture group</td></tr>
                   </tbody>
                 </table>
                 <h4>Flag Reference</h4>

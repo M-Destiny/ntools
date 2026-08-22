@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 // Simple JSONPath implementation (subset)
 interface JsonPathResult {
@@ -127,7 +127,7 @@ export default function JsonPathTester() {
     }
   }, [jsonInput]);
 
-  const evaluate = useMemo(() => {
+  useEffect(() => {
     if (!parsedJson || !pathExpr.trim()) {
       setResults([]);
       return;
@@ -247,7 +247,7 @@ export default function JsonPathTester() {
                     <tr><td><code>[n]</code></td><td>Array index (0-based)</td></tr>
                     <tr><td><code>[m:n]</code></td><td>Array slice</td></tr>
                     <tr><td><code>[?(@.prop)]</code></td><td>Filter expression</td></tr>
-                    <tr><td><code>[?(@.prop > 10)]</code></td><td>Comparison filter</td></tr>
+                    <tr><td><code>[?(@.prop {'>'} 10)]</code></td><td>Comparison filter</td></tr>
                     <tr><td><code>[?(@.prop =~ /regex/)]</code></td><td>Regex filter</td></tr>
                   </tbody>
                 </table>
