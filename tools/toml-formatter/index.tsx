@@ -16,7 +16,7 @@ export default function TomlFormatter() {
       try {
         // Try to parse as TOML first (basic implementation)
         parsed = parseToml(input);
-      } catch (e) {
+      } catch {
         // If TOML parsing fails, try JSON as fallback
         try {
           parsed = JSON.parse(input);
@@ -36,10 +36,10 @@ export default function TomlFormatter() {
           setOutput('✓ Valid TOML');
           break;
       }
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Invalid TOML');
-      setOutput('');
-    }
+    } catch {
+          setError('Invalid TOML or JSON');
+          setOutput('');
+        }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -187,7 +187,7 @@ interface TypeInfo {
   children?: Record<string, TypeInfo>;
 }
 
-function inferType(value: any, seen: Set<string> = new Set()): TypeInfo {
+function inferType(value: any): TypeInfo {
   if (value === null) {
     return { type: 'interface{}', isArray: false, isNull: true };
   }
@@ -201,7 +201,7 @@ function inferType(value: any, seen: Set<string> = new Set()): TypeInfo {
     if (!firstNonNull) {
       return { type: 'interface{}', isArray: true, isNull: false };
     }
-    const elementType = inferType(firstNonNull, seen);
+    const elementType = inferType(firstNonNull);
     return { 
       type: elementType.type, 
       isArray: true, 
@@ -213,7 +213,7 @@ function inferType(value: any, seen: Set<string> = new Set()): TypeInfo {
   if (typeof value === 'object') {
     const children: Record<string, TypeInfo> = {};
     for (const [key, val] of Object.entries(value)) {
-      children[key] = inferType(val, seen);
+      children[key] = inferType(val);
     }
     return { 
       type: 'struct', 
