@@ -50,6 +50,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📐',
     shortcut: 'A'
   },
+  'css-variable-generator': {
+    name: 'css-variable-generator',
+    displayName: 'CSS Variable Generator',
+    description: 'Generate CSS custom properties with shades and opacity variants from a single base color. Export as CSS, SCSS, Tailwind config, or JSON.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-variable-generator').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'V'
+  },
   'css-flexbox-generator': {
     name: 'css-flexbox-generator',
     displayName: 'CSS Flexbox Generator',
@@ -328,6 +337,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/json-validator').then(m => ({ default: m.default }))),
     icon: '✅',
     shortcut: 'V'
+  },
+  'json-minifier': {
+    name: 'json-minifier',
+    displayName: 'JSON Minifier',
+    description: 'Minify JSON by removing all whitespace. Validates JSON before minifying with compression stats.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-minifier').then(m => ({ default: m.default }))),
+    icon: '📦',
+    shortcut: 'M'
   },
   'license-generator': {
     name: 'license-generator',
