@@ -653,6 +653,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔷',
     shortcut: 'G'
   },
+  'csv-to-sql': {
+    name: 'csv-to-sql',
+    displayName: 'CSV to SQL',
+    description: 'Convert CSV data to SQL INSERT statements with optional CREATE TABLE statement. Supports automatic type inference and custom delimiters.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-sql').then(m => ({ default: m.default }))),
+    icon: '🗃️',
+    shortcut: 'C'
+  },
+  'json-to-xml': {
+    name: 'json-to-xml',
+    displayName: 'JSON to XML',
+    description: 'Convert JSON to XML with configurable root element, attribute prefix, array item naming, and pretty printing.',
+    category: 'Data',
+    component: lazy(() => import('../tools/json-to-xml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'X'
+  },
 };
 
 // Derived data

@@ -49,16 +49,16 @@ export default function CsvToSql() {
   const inferType = (values: string[]): string => {
     const nonEmpty = values.filter(v => v !== '');
     if (nonEmpty.length === 0) return 'TEXT';
-    
+
     const allInt = nonEmpty.every(v => /^-?\d+$/.test(v));
     if (allInt) return 'INTEGER';
-    
+
     const allFloat = nonEmpty.every(v => /^-?\d*\.?\d+$/.test(v));
     if (allFloat) return 'REAL';
-    
+
     const allBool = nonEmpty.every(v => v.toLowerCase() === 'true' || v.toLowerCase() === 'false');
     if (allBool) return 'BOOLEAN';
-    
+
     return 'TEXT';
   };
 
@@ -91,16 +91,15 @@ export default function CsvToSql() {
       });
 
       let sql = '';
-      
+
       if (includeCreateTable) {
         const columnDefs = columns.map(c => `"${c.name}" ${c.type}`).join(',\n  ');
         sql += `CREATE TABLE "${tableName}" (\n  ${columnDefs}\n);\n\n`;
       }
 
       // Generate INSERT statements
-      const placeholders = columns.map(() => '?').join(', ');
       const insertHeader = `INSERT INTO "${tableName}" (${columns.map(c => `"${c.name}"`).join(', ')}) VALUES`;
-      
+
       const valueRows = dataRows.map(row => {
         const values = row.map((val, i) => {
           if (val === '') return 'NULL';
