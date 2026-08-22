@@ -635,6 +635,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🗃️',
     shortcut: 'S'
   },
+  'toml-formatter': {
+    name: 'toml-formatter',
+    displayName: 'TOML Formatter',
+    description: 'Format, validate, minify, and prettify TOML with syntax highlighting.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/toml-formatter').then(m => ({ default: m.default }))),
+    icon: '📝',
+    shortcut: 'T'
+  },
+  'json-to-go': {
+    name: 'json-to-go',
+    displayName: 'JSON to Go Structs',
+    description: 'Convert JSON to Go structs with JSON tags, pointer options, and nested types.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-to-go').then(m => ({ default: m.default }))),
+    icon: '🔷',
+    shortcut: 'G'
+  },
 };
 
 // Derived data
