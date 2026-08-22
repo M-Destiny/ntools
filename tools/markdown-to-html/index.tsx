@@ -15,12 +15,12 @@ export default function MarkdownToHtml() {
 
   const markdownToHtml = (md: string): string => {
     if (!md) return '';
-    
+
     let html = md;
-    
+
     // Escape HTML first
     html = escapeHtml(html);
-    
+
     // Headers
     html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
     html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
@@ -28,7 +28,7 @@ export default function MarkdownToHtml() {
     html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
     html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
     html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-    
+
     // Bold and italic
     html = html.replace(/\*\*\*(.*?)\*\*\*/gim, '<strong><em>$1</em></strong>');
     html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
@@ -36,45 +36,45 @@ export default function MarkdownToHtml() {
     html = html.replace(/__(.*?)__/gim, '<strong>$1</strong>');
     html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
     html = html.replace(/_(.*?)_/gim, '<em>$1</em>');
-    
+
     // Strikethrough
     html = html.replace(/~~(.*?)~~/gim, '<del>$1</del>');
-    
+
     // Code blocks
-    html = html.replace(/```(\w+)?\n([\s\S]*?)```/gim, (match, lang, code) => {
+    html = html.replace(/```(\w+)?\n([\s\S]*?)```/gim, (_match, lang, code) => {
       const language = lang ? ` class="language-${lang}"` : '';
       return `<pre><code${language}>${escapeHtml(code.trim())}</code></pre>`;
     });
-    
+
     // Inline code
     html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
-    
+
     // Links
     html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-    
+
     // Images
     html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/gim, '<img src="$2" alt="$1" />');
-    
+
     // Blockquotes
     html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
-    
+
     // Horizontal rules
     html = html.replace(/^---$/gim, '<hr />');
     html = html.replace(/^\*\*\*$/gim, '<hr />');
     html = html.replace(/^___$/gim, '<hr />');
-    
+
     // Lists - ordered
     html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
     html = html.replace(/(<li>.*<\/li>)/gim, '<ol>$1</ol>');
-    
+
     // Lists - unordered
     html = html.replace(/^[-*+] (.*$)/gim, '<li>$1</li>');
     html = html.replace(/(<li>.*<\/li>)/gim, '<ul>$1</ul>');
-    
+
     // Fix nested list tags
     html = html.replace(/<\/ol>\s*<ol>/gim, '');
     html = html.replace(/<\/ul>\s*<ul>/gim, '');
-    
+
     // Paragraphs
     html = html.split('\n\n').map(block => {
       block = block.trim();
@@ -84,24 +84,24 @@ export default function MarkdownToHtml() {
       }
       return `<p>${block.replace(/\n/g, '<br />')}</p>`;
     }).join('\n\n');
-    
+
     // Tables (basic)
-    html = html.replace(/\|(.+)\|\n\|([\-:\| ]+)\|\n((?:\|.+\|\n?)+)/gim, (match, header, separator, rows) => {
-      const headers = header.split('|').map(h => h.trim()).filter(Boolean);
-      const aligns = separator.split('|').map(s => {
+    html = html.replace(/\|(.+)\|\n\|([\-\:\| ]+)\|\n((?:\|.+\|\n?)+)/gim, (_match, header, separator, rows) => {
+      const headers = header.split('|').map((h: string) => h.trim()).filter(Boolean);
+      const aligns = separator.split('|').map((s: string) => {
         s = s.trim();
         if (s.startsWith(':') && s.endsWith(':')) return ' style="text-align:center"';
         if (s.endsWith(':')) return ' style="text-align:right"';
         if (s.startsWith(':')) return ' style="text-align:left"';
         return '';
       }).filter(Boolean);
-      const rowHtml = rows.trim().split('\n').map(row => {
-        const cells = row.split('|').map(c => c.trim()).filter(Boolean);
-        return '<tr>' + cells.map((cell, i) => `<td${aligns[i] || ''}>${cell}</td>`).join('') + '</tr>';
+      const rowHtml = rows.trim().split('\n').map((row: string) => {
+        const cells = row.split('|').map((c: string) => c.trim()).filter(Boolean);
+        return '<tr>' + cells.map((cell: string, i: number) => `<td${aligns[i] || ''}>${cell}</td>`).join('') + '</tr>';
       }).join('');
-      return '<table><thead><tr>' + headers.map((h, i) => `<th${aligns[i] || ''}>${h}</th>`).join('') + '</tr></thead><tbody>' + rowHtml + '</tbody></table>';
+      return '<table><thead><tr>' + headers.map((h: string, i: number) => `<th${aligns[i] || ''}>${h}</th>`).join('') + '</tr></thead><tbody>' + rowHtml + '</tbody></table>';
     });
-    
+
     return html;
   };
 
@@ -241,8 +241,8 @@ console.log(greet('World'));
             <h3>{previewMode === 'preview' ? 'Rendered Preview' : 'HTML Output'}</h3>
           </div>
           {previewMode === 'preview' ? (
-            <div 
-              className="markdown-preview" 
+            <div
+              className="markdown-preview"
               dangerouslySetInnerHTML={{ __html: htmlOutput }}
             />
           ) : (
@@ -278,7 +278,7 @@ console.log(greet('World'));
                 <tr><td>Code Block</td><td><code>```lang\ncode\n```</code></td><td><code>```js\n...</code></td></tr>
                 <tr><td>Link</td><td><code>[text](url)</code></td><td><code>[GitHub](https://github.com)</code></td></tr>
                 <tr><td>Image</td><td><code>![alt](url)</code></td><td><code>![Logo](logo.png)</code></td></tr>
-                <tr><td>Blockquote</td><td><code>> text</code></td><td><code>> Quote</code></td></tr>
+                <tr><td>Blockquote</td><td><code>{'>'} text</code></td><td><code>{'>'} Quote</code></td></tr>
                 <tr><td>Horizontal Rule</td><td><code>---</code> or <code>***</code></td><td><code>---</code></td></tr>
                 <tr><td>Unordered List</td><td><code>- item</code> or <code>* item</code></td><td><code>- Item 1</code></td></tr>
                 <tr><td>Ordered List</td><td><code>1. item</code></td><td><code>1. First</code></td></tr>

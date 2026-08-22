@@ -150,24 +150,22 @@ export default function JsonDiff() {
   const computeDiff = useCallback(() => {
     setLeftError(null);
     setRightError(null);
+    let left: unknown;
+    let right: unknown;
     try {
-      const left = parseJson(leftJson);
-      setLeftError(null);
+      left = parseJson(leftJson);
     } catch (e) {
       setLeftError(e instanceof Error ? e.message : 'Invalid JSON');
       return;
     }
     try {
-      const right = parseJson(rightJson);
-      setRightError(null);
+      right = parseJson(rightJson);
     } catch (e) {
       setRightError(e instanceof Error ? e.message : 'Invalid JSON');
       return;
     }
 
     try {
-      const left = parseJson(leftJson);
-      const right = parseJson(rightJson);
       const diff = diffObjects(left, right);
       setDiffResult(diff);
     } catch (e) {
