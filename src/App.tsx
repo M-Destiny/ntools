@@ -644,6 +644,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📝',
     shortcut: 'T'
   },
+  'toml-to-json': {
+    name: 'toml-to-json',
+    displayName: 'TOML to JSON',
+    description: 'Convert TOML configuration files to JSON with configurable indentation.',
+    category: 'Data',
+    component: lazy(() => import('../tools/toml-to-json').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'T'
+  },
+  'json-to-toml': {
+    name: 'json-to-toml',
+    displayName: 'JSON to TOML',
+    description: 'Convert JSON data to TOML format.',
+    category: 'Data',
+    component: lazy(() => import('../tools/json-to-toml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'J'
+  },
   'json-to-go': {
     name: 'json-to-go',
     displayName: 'JSON to Go Structs',
