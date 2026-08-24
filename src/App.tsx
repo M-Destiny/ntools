@@ -681,15 +681,51 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     shortcut: 'C'
   },
   'json-to-xml': {
-    name: 'json-to-xml',
-    displayName: 'JSON to XML',
-    description: 'Convert JSON to XML with configurable root element, attribute prefix, array item naming, and pretty printing.',
-    category: 'Data',
-    component: lazy(() => import('../tools/json-to-xml').then(m => ({ default: m.default }))),
-    icon: '🔄',
-    shortcut: 'X'
-  },
-};
+      name: 'json-to-xml',
+      displayName: 'JSON to XML',
+      description: 'Convert JSON to XML with configurable root element, attribute prefix, array item naming, and pretty printing.',
+      category: 'Data',
+      component: lazy(() => import('../tools/json-to-xml').then(m => ({ default: m.default }))),
+      icon: '🔄',
+      shortcut: 'X'
+    },
+    'json-schema-validator': {
+      name: 'json-schema-validator',
+      displayName: 'JSON Schema Validator',
+      description: 'Validate JSON data against JSON Schema (Draft 7). Check compliance, find errors, and test schemas with examples.',
+      category: 'Developer',
+      component: lazy(() => import('../tools/json-schema-validator').then(m => ({ default: m.default }))),
+      icon: '✅',
+      shortcut: 'V'
+    },
+    'url-builder': {
+      name: 'url-builder',
+      displayName: 'URL Builder',
+      description: 'Construct URLs visually with protocol, host, path, query parameters, and fragments. Parse existing URLs and encode/decode.',
+      category: 'Utility',
+      component: lazy(() => import('../tools/url-builder').then(m => ({ default: m.default }))),
+      icon: '🔗',
+      shortcut: 'U'
+    },
+    'html-validator': {
+      name: 'html-validator',
+      displayName: 'HTML Validator',
+      description: 'Validate HTML5 markup for syntax errors, accessibility issues, and best practices. Check compliance with W3C standards.',
+      category: 'Developer',
+      component: lazy(() => import('../tools/html-validator').then(m => ({ default: m.default }))),
+      icon: '✅',
+      shortcut: 'H'
+    },
+    'sitemap-generator': {
+      name: 'sitemap-generator',
+      displayName: 'Sitemap Generator',
+      description: 'Generate XML sitemaps for search engines. Define URLs, set priorities, change frequencies, and lastmod dates. Parse existing sitemaps.',
+      category: 'Developer',
+      component: lazy(() => import('../tools/sitemap-generator').then(m => ({ default: m.default }))),
+      icon: '🗺️',
+      shortcut: 'S'
+    }
+  };
 
 // Derived data
 const CATEGORIES = ['All', ...new Set(Object.values(TOOL_REGISTRY).map(t => t.category))];
