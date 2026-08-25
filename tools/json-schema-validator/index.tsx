@@ -346,10 +346,12 @@ function validate(data: unknown, schema: JSONSchema7, path = ''): string[] {
 
   // Properties validation
   if (schema.properties && typeof data === 'object' && data !== null && !Array.isArray(data)) {
-    for (const [key, propSchema] of Object.entries(schema.properties)) {
-      if (key in data) {
+    const properties = schema.properties as Record<string, JSONSchema7>;
+    const dataObj = data as Record<string, unknown>;
+    for (const [key, propSchema] of Object.entries(properties)) {
+      if (key in dataObj) {
         const newPath = path ? `${path}.${key}` : key;
-        errors.push(...validate(data[key], propSchema as JSONSchema7, newPath));
+        errors.push(...validate(dataObj[key], propSchema, newPath));
       }
     }
   }
@@ -360,7 +362,8 @@ function validate(data: unknown, schema: JSONSchema7, path = ''): string[] {
       ...Object.keys(schema.properties || {}),
       ...Object.keys(schema.patternProperties || {})
     ]);
-    for (const key of Object.keys(data)) {
+    const dataObj = data as Record<string, unknown>;
+    for (const key of Object.keys(dataObj)) {
       if (!allowedProps.has(key)) {
         let matched = false;
         const patternProps = schema.patternProperties || {};
@@ -379,12 +382,14 @@ function validate(data: unknown, schema: JSONSchema7, path = ''): string[] {
 
   // Pattern properties
   if (schema.patternProperties && typeof data === 'object' && data !== null && !Array.isArray(data)) {
-    for (const [pattern, propSchema] of Object.entries(schema.patternProperties)) {
+    const dataObj = data as Record<string, unknown>;
+    const patternProperties = schema.patternProperties as Record<string, JSONSchema7>;
+    for (const [pattern, propSchema] of Object.entries(patternProperties)) {
       const regex = new RegExp(pattern);
-      for (const key of Object.keys(data)) {
+      for (const key of Object.keys(dataObj)) {
         if (regex.test(key) && !(key in (schema.properties || {}))) {
           const newPath = path ? `${path}.${key}` : key;
-          errors.push(...validate(data[key], propSchema as JSONSchema7, newPath));
+          errors.push(...validate(dataObj[key], propSchema, newPath));
         }
       }
     }
