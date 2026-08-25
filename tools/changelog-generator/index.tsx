@@ -26,8 +26,6 @@ interface Release {
 }
 
 export default function ChangelogGenerator() {
-  const [version, setVersion] = useState('1.0.0');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [releases, setReleases] = useState<Release[]>([{
     version: '1.0.0',
     date: new Date().toISOString().split('T')[0],
@@ -143,8 +141,6 @@ export default function ChangelogGenerator() {
   }, [output]);
 
   const loadExample = useCallback(() => {
-    setVersion('2.1.0');
-    setDate(new Date().toISOString().split('T')[0]);
     setReleases([
       {
         version: '2.1.0',

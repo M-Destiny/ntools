@@ -75,11 +75,8 @@ export default function CommitMessageGenerator() {
     setScope('auth');
     setDescription('add OAuth2 login with Google provider');
     setBody('Implements OAuth2 flow with Google as identity provider.\n\n- Adds GoogleStrategy to passport configuration\n- Creates /auth/google and /auth/google/callback routes\n- Stores refresh tokens securely in database\n- Adds user profile sync on first login');
-    setBreakingChanges('');
     setFooter('Closes #123\nRelated: #456');
   }, []);
-
-  const getSelectedType = COMMIT_TYPES.find(t => t.id === type);
 
   return (
     <div className="tool-container">
@@ -234,13 +231,13 @@ export default function CommitMessageGenerator() {
           <summary>Conventional Commits Guide</summary>
           <div className="help-content">
             <h4>Format</h4>
-            <pre><code><type>[<scope>]: <description>
+            <pre><code>{`<type>[<scope>]: <description>
 
 [<body>]
 
 [<BREAKING CHANGE>]
 
-[<footer>]</code></pre>
+[<footer>`}</code></pre>
 
             <h4>Types</h4>
             <table>
@@ -271,23 +268,23 @@ export default function CommitMessageGenerator() {
             </ul>
 
             <h4>Examples</h4>
-            <pre><code>feat(auth): add OAuth2 login with Google provider
+            <pre><code>{`feat(auth): add OAuth2 login with Google provider
 
 Implements OAuth2 flow with Google as identity provider.
 
-Closes #123</code></pre>
-            <pre><code>fix(api): handle null response in user endpoint
+Closes #123`}</code></pre>
+            <pre><code>{`fix(api): handle null response in user endpoint
 
 Previously the endpoint would crash when user service
 returned null. Now returns 404 with proper error message.
 
-Fixes #456</code></pre>
-            <pre><code>BREAKING CHANGE: remove deprecated v1 API endpoints
+Fixes #456`}</code></pre>
+            <pre><code>{`BREAKING CHANGE: remove deprecated v1 API endpoints
 
 The v1 endpoints have been deprecated since v2.0.0.
 Migration guide: https://example.com/migration
 
-feat(api): add new v2 user endpoints</code></pre>
+feat(api): add new v2 user endpoints`}</code></pre>
           </div>
         </details>
       </div>
