@@ -218,14 +218,14 @@ export default function ColorFormatConverter() {
     const val = e.target.value;
     setInput(val);
     const parsed = parseColor(val);
-    if (parsed) {
+    if (parsed && parsed.r !== undefined && parsed.g !== undefined && parsed.b !== undefined) {
       setError(null);
-      const { r, g, b, a } = parsed;
+      const { r, g, b, a = 1 } = parsed;
       const { h, s, l } = rgbToHsl(r, g, b);
       const { v } = rgbToHsv(r, g, b);
       const { c, m, y, k } = rgbToCmyk(r, g, b);
       const hex = toHex(r, g, b, a);
-      setColor({ r, g, b, a: a ?? 1, h, s, l, v, c, m, y, k, hex });
+      setColor({ r, g, b, a, h, s, l, v, c, m, y, k, hex });
     } else {
       setError('Invalid color format');
     }

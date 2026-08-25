@@ -769,6 +769,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/cors-tester').then(m => ({ default: m.default }))),
     icon: '🌐',
     shortcut: 'O'
+  },
+  'color-format-converter': {
+    name: 'color-format-converter',
+    displayName: 'Color Format Converter',
+    description: 'Convert colors between Hex, RGB, HSL, HSV, CMYK, and CSS formats. Real-time conversion with visual preview and all-formats table.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-format-converter').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'F'
+  },
+  'color-namer': {
+    name: 'color-namer',
+    displayName: 'Color Namer',
+    description: 'Find the closest CSS/SVG named color match for any hex color. Includes all 147 standard named colors with distance metrics.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-namer').then(m => ({ default: m.default }))),
+    icon: '🏷️',
+    shortcut: 'N'
   }
   };
 
