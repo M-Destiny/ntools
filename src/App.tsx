@@ -203,6 +203,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔐',
     shortcut: 'B'
   },
+  'base64-decoder': {
+    name: 'base64-decoder',
+    displayName: 'Base64 Decoder',
+    description: 'Decode Base64 strings back to text or binary. Auto-detects encoding and handles UTF-8 safely.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/base64-decoder').then(m => ({ default: m.default }))),
+    icon: '🔓',
+    shortcut: 'B'
+  },
   'cron-builder': {
     name: 'cron-builder',
     displayName: 'Cron Expression Builder',
@@ -238,6 +247,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default }))),
     icon: '♿',
     shortcut: 'A'
+  },
+  'color-blind-simulator': {
+    name: 'color-blind-simulator',
+    displayName: 'Color Blindness Simulator',
+    description: 'Simulate how colors appear to people with different types of color vision deficiency (protanopia, deuteranopia, tritanopia, achromatopsia, and anomalies).',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-blind-simulator').then(m => ({ default: m.default }))),
+    icon: '👁️',
+    shortcut: 'B'
   },
   'password-generator': {
     name: 'password-generator',
@@ -545,15 +563,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔑',
     shortcut: 'J'
   },
-  'base64-decoder': {
-    name: 'base64-decoder',
-    displayName: 'Base64 Decoder',
-    description: 'Decode Base64 strings back to text or binary. Auto-detects encoding and handles UTF-8 safely.',
-    category: 'Utility',
-    component: lazy(() => import('../tools/base64-decoder').then(m => ({ default: m.default }))),
-    icon: '🔓',
-    shortcut: 'B'
-  },
   'yaml-formatter': {
     name: 'yaml-formatter',
     displayName: 'YAML Formatter',
@@ -742,6 +751,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/mermaid-live-editor').then(m => ({ default: m.default }))),
     icon: '📊',
     shortcut: 'M'
+  },
+  'color-palette-extractor': {
+    name: 'color-palette-extractor',
+    displayName: 'Color Palette Extractor',
+    description: 'Upload an image to extract its dominant color palette. Get hex, RGB, HSL values and CSS variables.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-palette-extractor').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'X'
+  },
+  'cors-tester': {
+    name: 'cors-tester',
+    displayName: 'CORS Tester',
+    description: 'Test Cross-Origin Resource Sharing (CORS) configuration. Sends actual requests to verify headers, preflight handling, and credential support.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/cors-tester').then(m => ({ default: m.default }))),
+    icon: '🌐',
+    shortcut: 'O'
   }
   };
 

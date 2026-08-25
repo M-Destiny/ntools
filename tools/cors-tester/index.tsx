@@ -101,7 +101,7 @@ export default function CorsTester() {
         responseHeaders,
         status: response.status,
         statusText: response.statusText,
-        allowed: checkCorsAllowed(responseHeaders, origin, method, isPreflight),
+        allowed: checkCorsAllowed(responseHeaders, origin),
       };
 
       if (isPreflight) {
@@ -142,9 +142,7 @@ export default function CorsTester() {
 
   const checkCorsAllowed = (
     responseHeaders: Record<string, string>,
-    origin: string,
-    method: string,
-    isPreflight: boolean
+    origin: string
   ): boolean => {
     const acao = responseHeaders['access-control-allow-origin'];
     if (!acao) return false;
@@ -175,17 +173,6 @@ export default function CorsTester() {
     return Object.entries(headers)
       .map(([k, v]) => `${k}: ${v}`)
       .join('\n') || '(none)';
-  };
-
-  const getCorsHeaders = (headers: Record<string, string>) => {
-    const corsHeaders: Record<string, string> = {};
-    Object.entries(headers).forEach(([k, v]) => {
-      const lower = k.toLowerCase();
-      if (lower.startsWith('access-control-') || lower === 'origin' || lower === 'vary') {
-        corsHeaders[k] = v;
-      }
-    });
-    return corsHeaders;
   };
 
   return (
