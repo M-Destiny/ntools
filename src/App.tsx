@@ -113,6 +113,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔍',
     shortcut: 'R'
   },
+  'commit-message-generator': {
+    name: 'commit-message-generator',
+    displayName: 'Commit Message Generator',
+    description: 'Generate conventional commit messages following the Conventional Commits specification. Supports all standard types, scopes, breaking changes, and footers.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/commit-message-generator').then(m => ({ default: m.default }))),
+    icon: '📝',
+    shortcut: 'C'
+  },
+  'changelog-generator': {
+    name: 'changelog-generator',
+    displayName: 'Changelog Generator',
+    description: 'Create professional changelogs following the Keep a Changelog format. Organize changes by type (Added, Changed, Deprecated, Removed, Fixed, Security) with version management.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/changelog-generator').then(m => ({ default: m.default }))),
+    icon: '📋',
+    shortcut: 'H'
+  },
   'color-picker': {
     name: 'color-picker',
     displayName: 'Color Picker',
