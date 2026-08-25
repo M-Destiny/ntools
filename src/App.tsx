@@ -724,7 +724,25 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
       component: lazy(() => import('../tools/sitemap-generator').then(m => ({ default: m.default }))),
       icon: '🗺️',
       shortcut: 'S'
-    }
+    },
+  'api-tester': {
+    name: 'api-tester',
+    displayName: 'API Tester',
+    description: 'Test REST APIs with all HTTP methods, query parameters, headers, authentication (Bearer, Basic, API Key), request bodies, and formatted responses.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/api-tester').then(m => ({ default: m.default }))),
+    icon: '🔌',
+    shortcut: 'A'
+  },
+  'mermaid-live-editor': {
+    name: 'mermaid-live-editor',
+    displayName: 'Mermaid Live Editor',
+    description: 'Write and preview Mermaid diagrams in real-time with support for flowcharts, sequence diagrams, class diagrams, Gantt charts, pie charts, and entity relationship diagrams.',
+    category: 'Design',
+    component: lazy(() => import('../tools/mermaid-live-editor').then(m => ({ default: m.default }))),
+    icon: '📊',
+    shortcut: 'M'
+  }
   };
 
 // Derived data
