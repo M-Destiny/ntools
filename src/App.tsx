@@ -131,6 +131,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📋',
     shortcut: 'H'
   },
+  'component-generator': {
+    name: 'component-generator',
+    displayName: 'Component Generator',
+    description: 'Generate production-ready React components with 8 architectural patterns, TypeScript support, and customizable props.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/component-generator').then(m => ({ default: m.default }))),
+    icon: '⚛️',
+    shortcut: 'K'
+  },
   'color-picker': {
     name: 'color-picker',
     displayName: 'Color Picker',
@@ -238,6 +247,15 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/cron-builder').then(m => ({ default: m.default }))),
     icon: '⏰',
     shortcut: 'C'
+  },
+  'cron-expression-visualizer': {
+    name: 'cron-expression-visualizer',
+    displayName: 'Cron Expression Visualizer',
+    description: 'Visual cron expression builder and validator. See human-readable descriptions, field breakdowns, and next run times for any cron expression.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/cron-expression-visualizer').then(m => ({ default: m.default }))),
+    icon: '📅',
+    shortcut: 'V'
   },
   'jwt-decoder': {
     name: 'jwt-decoder',
@@ -805,24 +823,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/color-namer').then(m => ({ default: m.default }))),
     icon: '🏷️',
     shortcut: 'N'
-  },
-  'aspect-ratio-calculator': {
-    name: 'aspect-ratio-calculator',
-    displayName: 'Aspect Ratio Calculator',
-    description: 'Calculate dimensions, convert ratios, and find matching resolutions with presets for common screen sizes.',
-    category: 'Utility',
-    component: lazy(() => import('../tools/aspect-ratio-calculator').then(m => ({ default: m.default }))),
-    icon: '📐',
-    shortcut: 'A'
-  },
-  'base64-encoder': {
-    name: 'base64-encoder',
-    displayName: 'Base64 Encoder/Decoder',
-    description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
-    category: 'Utility',
-    component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default }))),
-    icon: '🔐',
-    shortcut: 'B'
   }
   };
 

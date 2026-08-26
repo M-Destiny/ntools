@@ -106,18 +106,17 @@ function generateBasicComponent(props: Prop[], name: string, opts: GeneratorOpti
     lines.push('');
   }
 
-  const propsParam = opts.propsDestructuring 
-    ? `{ ${props.map(p => `${p.name}${p.required ? '' : '?'}`).join(', ')} }`
-    : 'props';
+  const propsParam = opts.propsDestructuring
+      ? `{ ${props.map(p => `${p.name}${p.required ? '' : '?'}`).join(', ')} }`
+      : 'props';
 
-  const componentType = opts.typescript ? 'React.FC' : '';
-  const generic = opts.typescript && opts.useInterface && props.length > 0 ? `<${name}Props>` : '';
-  const arrow = opts.arrowFunction ? '= ' : '';
-  const fnKeyword = opts.arrowFunction ? 'const' : 'function';
-  const memoWrapper = opts.memo ? 'React.memo(' : '';
-  const memoClose = opts.memo ? ')' : '';
+    const generic = opts.typescript && opts.useInterface && props.length > 0 ? `<${name}Props>` : '';
+    const arrow = opts.arrowFunction ? '= ' : '';
+    const fnKeyword = opts.arrowFunction ? 'const' : 'function';
+    const memoWrapper = opts.memo ? 'React.memo(' : '';
+    const memoClose = opts.memo ? ')' : '';
 
-  lines.push(`${memoWrapper}${fnKeyword} ${name}${generic} ${arrow}( ${propsParam} ) {`);
+    lines.push(`${memoWrapper}${fnKeyword} ${name}${generic} ${arrow}( ${propsParam} ) {`);
   
   if (!opts.propsDestructuring && props.length > 0) {
     const destructured = props.map(p => `  const { ${p.name} } = props;`).join('\n');
