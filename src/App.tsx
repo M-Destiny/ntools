@@ -293,6 +293,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '👁️',
     shortcut: 'B'
   },
+  'css-beautifier': {
+    name: 'css-beautifier',
+    displayName: 'CSS Beautifier',
+    description: 'Format and prettify CSS with configurable indentation, brace style, and selector separation. Supports space/tab indentation and multiple formatting modes.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-beautifier').then(m => ({ default: m.default }))),
+    icon: '💅',
+    shortcut: 'E'
+  },
+  'css-specificity-calculator': {
+    name: 'css-specificity-calculator',
+    displayName: 'CSS Specificity Calculator',
+    description: 'Calculate and compare CSS selector specificity. Enter one selector per line to see their specificity scores broken down by IDs, classes/attributes/pseudo-classes, and elements.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-specificity-calculator').then(m => ({ default: m.default }))),
+    icon: '🎯',
+    shortcut: 'S'
+  },
   'password-generator': {
     name: 'password-generator',
     displayName: 'Password Generator',
