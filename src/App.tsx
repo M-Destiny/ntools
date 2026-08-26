@@ -895,6 +895,42 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/editorconfig-generator').then(m => ({ default: m.default }))),
     icon: '⚙️',
     shortcut: 'E'
+  },
+  'csv-to-xml': {
+    name: 'csv-to-xml',
+    displayName: 'CSV to XML',
+    description: 'Convert CSV data to XML with configurable root element, row element, and header handling.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-xml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'X'
+  },
+  'csv-to-yaml': {
+    name: 'csv-to-yaml',
+    displayName: 'CSV to YAML',
+    description: 'Convert CSV data to YAML format with customizable delimiters and header options.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-yaml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'Y'
+  },
+  'env-editor': {
+    name: 'env-editor',
+    displayName: 'Env Editor',
+    description: 'Parse, edit, and generate .env files with a table UI. Create .env.example templates from existing files.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/env-editor').then(m => ({ default: m.default }))),
+    icon: '⚙️',
+    shortcut: 'E'
+  },
+  'graphql-playground': {
+    name: 'graphql-playground',
+    displayName: 'GraphQL Playground',
+    description: 'Test GraphQL queries against any endpoint with variables, headers, and history. Supports GitHub, Rick and Morty, Countries, and Star Wars APIs.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/graphql-playground').then(m => ({ default: m.default }))),
+    icon: '🔌',
+    shortcut: 'G'
   }
   };
 

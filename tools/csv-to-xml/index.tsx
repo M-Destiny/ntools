@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function CsvToXml() {
   const [csvInput, setCsvInput] = useState('');
@@ -91,7 +91,7 @@ export default function CsvToXml() {
       let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
       xml += `<${root}>\n`;
       
-      dataRows.forEach((dataRow, rowIndex) => {
+      dataRows.forEach((dataRow) => {
         xml += `  <${row}>\n`;
         headers.forEach((header, colIndex) => {
           const value = dataRow[colIndex] !== undefined ? dataRow[colIndex] : '';

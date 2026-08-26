@@ -16,7 +16,7 @@ export default function CsvToYaml() {
     const headers = lines[0].split(delimiterChar).map(h => h.trim().replace(/^"|"$/g, ''));
     
     const startIndex = hasHeader ? 1 : 0;
-    const data = lines.slice(startIndex).map((line, rowIndex) => {
+    const data = lines.slice(startIndex).map((line) => {
       const values = line.split(delimiterChar).map(v => v.trim().replace(/^"|"$/g, ''));
       const obj: Record<string, string> = {};
       
