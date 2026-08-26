@@ -825,23 +825,41 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     shortcut: 'O'
   },
   'color-format-converter': {
-    name: 'color-format-converter',
-    displayName: 'Color Format Converter',
-    description: 'Convert colors between Hex, RGB, HSL, HSV, CMYK, and CSS formats. Real-time conversion with visual preview and all-formats table.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-format-converter').then(m => ({ default: m.default }))),
-    icon: '🔄',
-    shortcut: 'F'
-  },
-  'color-namer': {
-    name: 'color-namer',
-    displayName: 'Color Namer',
-    description: 'Find the closest CSS/SVG named color match for any hex color. Includes all 147 standard named colors with distance metrics.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-namer').then(m => ({ default: m.default }))),
-    icon: '🏷️',
-    shortcut: 'N'
-  }
+      name: 'color-format-converter',
+      displayName: 'Color Format Converter',
+      description: 'Convert colors between Hex, RGB, HSL, HSV, CMYK, and CSS formats. Real-time conversion with visual preview and all-formats table.',
+      category: 'Design',
+      component: lazy(() => import('../tools/color-format-converter').then(m => ({ default: m.default }))),
+      icon: '🔄',
+      shortcut: 'F'
+    },
+    'color-namer': {
+      name: 'color-namer',
+      displayName: 'Color Namer',
+      description: 'Find the closest CSS/SVG named color match for any hex color. Includes all 147 standard named colors with distance metrics.',
+      category: 'Design',
+      component: lazy(() => import('../tools/color-namer').then(m => ({ default: m.default }))),
+      icon: '🏷️',
+      shortcut: 'N'
+    },
+    'regex-generator': {
+      name: 'regex-generator',
+      displayName: 'Regex Generator',
+      description: 'Build, test, and export regular expressions with 23 built-in patterns, custom regex support, flag configuration, live match testing, and code export for 10 languages.',
+      category: 'Developer',
+      component: lazy(() => import('../tools/regex-generator').then(m => ({ default: m.default }))),
+      icon: '🔧',
+      shortcut: 'R'
+    },
+    'svg-optimizer': {
+      name: 'svg-optimizer',
+      displayName: 'SVG Optimizer',
+      description: 'Optimize and minify SVG files with 22 optimization options including comment removal, path optimization, color conversion, group collapsing, and real-time preview with size statistics.',
+      category: 'Design',
+      component: lazy(() => import('../tools/svg-optimizer').then(m => ({ default: m.default }))),
+      icon: '📐',
+      shortcut: 'O'
+    }
   };
 
 // Derived data

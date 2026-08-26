@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 interface Pattern {
   name: string;
@@ -164,16 +164,16 @@ const FLAGS = [
 ];
 
 const LANGUAGES = [
-  { value: 'javascript', label: 'JavaScript', wrapper: (p: string, f: string) => `/${p}/${f}` },
-  { value: 'python', label: 'Python', wrapper: (p: string, f: string) => `re.compile(r'${p}', ${f ? `re.${f}` : '0'})` },
-  { value: 'go', label: 'Go', wrapper: (p: string, f: string) => `regexp.MustCompile(\`${p}\`)` },
-  { value: 'java', label: 'Java', wrapper: (p: string, f: string) => `Pattern.compile("${p.replace(/"/g, '\\"')}")` },
-  { value: 'rust', label: 'Rust', wrapper: (p: string, f: string) => `regex::Regex::new(r"${p}").unwrap()` },
-  { value: 'php', label: 'PHP', wrapper: (p: string, f: string) => `~${p}~${f}` },
-  { value: 'ruby', label: 'Ruby', wrapper: (p: string, f: string) => `/${p}/${f}` },
-  { value: 'csharp', label: 'C#', wrapper: (p: string, f: string) => `new Regex(@"${p}", RegexOptions.${f.toUpperCase()})` },
-  { value: 'swift', label: 'Swift', wrapper: (p: string, f: string) => `try NSRegularExpression(pattern: "${p}", options: .${f})` },
-  { value: 'kotlin', label: 'Kotlin', wrapper: (p: string, f: string) => `Regex("${p}")` }
+  { value: 'javascript', label: 'JavaScript', wrapper: (p: string) => `/${p}/` },
+  { value: 'python', label: 'Python', wrapper: (p: string) => `re.compile(r'${p}')` },
+  { value: 'go', label: 'Go', wrapper: (p: string) => `regexp.MustCompile(\`${p}\`)` },
+  { value: 'java', label: 'Java', wrapper: (p: string) => `Pattern.compile("${p.replace(/\"/g, '\\\\\"')}")` },
+  { value: 'rust', label: 'Rust', wrapper: (p: string) => `regex::Regex::new(r"${p}").unwrap()` },
+  { value: 'php', label: 'PHP', wrapper: (p: string) => `~${p}~` },
+  { value: 'ruby', label: 'Ruby', wrapper: (p: string) => `/${p}/` },
+  { value: 'csharp', label: 'C#', wrapper: (p: string) => `new Regex(@"${p}")` },
+  { value: 'swift', label: 'Swift', wrapper: (p: string) => `try NSRegularExpression(pattern: "${p}")` },
+  { value: 'kotlin', label: 'Kotlin', wrapper: (p: string) => `Regex("${p}")` }
 ];
 
 export default function RegexGenerator() {
@@ -190,7 +190,12 @@ export default function RegexGenerator() {
     return isCustom ? customPattern : (selectedPattern?.pattern || '');
   }, [isCustom, customPattern, selectedPattern]);
 
-  const testRegex = useCallback(() => {
+  const handleFlagToggle = (flag: string) => {
+    setFlags(prev => prev.includes(flag) ? prev.replace(flag, '') : prev + flag);
+  };
+
+  // Test regex whenever pattern or flags change
+  useEffect(() => {
     const pattern = getActivePattern();
     if (!pattern) {
       setMatches(null);
@@ -199,7 +204,7 @@ export default function RegexGenerator() {
     }
     try {
       const regex = new RegExp(pattern, flags);
-      const result = testString.match(regex);
+      const result: RegExpMatchArray | null = testString.match(regex);
       setMatches(result);
       setError(null);
     } catch (e) {
@@ -208,15 +213,11 @@ export default function RegexGenerator() {
     }
   }, [getActivePattern, flags, testString]);
 
-  const handleFlagToggle = (flag: string) => {
-    setFlags(prev => prev.includes(flag) ? prev.replace(flag, '') : prev + flag);
-  };
-
   const getCodeSnippet = () => {
     const pattern = getActivePattern();
     const lang = LANGUAGES.find(l => l.value === language);
     if (!lang || !pattern) return '// Select a pattern or enter custom regex';
-    return lang.wrapper(pattern, flags);
+    return lang.wrapper(pattern);
   };
 
   const copyToClipboard = async (text: string) => {
@@ -348,31 +349,33 @@ export default function RegexGenerator() {
             {error && (
               <div style={styles.error}>{error}</div>
             )}
-            {!error && matches ? (
-              <div style={styles.matches}>
-                {matches.length === 0 ? (
-                  <div style={styles.noMatch}>No matches found</div>
-                ) : (
-                  matches.map((match, i) => (
-                    <div key={i} style={styles.match}>
-                      <div style={styles.matchMain}>{match[0]}</div>
-                      {match.length > 1 && (
-                        <div style={styles.matchGroups}>
-                          {match.slice(1).map((group, gi) => (
-                            <span key={gi} style={styles.group}>Group ${gi + 1}: {group}</span>
-                          ))}
+            {(() => {
+              if (!error && matches && matches.length > 0) {
+                return (
+                  <div style={styles.matches}>
+                    {(matches as unknown as RegExpMatchArray[]).map((matchItem: RegExpMatchArray, i: number) => (
+                      <div key={i} style={styles.match}>
+                        <div style={styles.matchMain}>{matchItem[0]}</div>
+                        {matchItem.length > 1 && (
+                          <div style={styles.matchGroups}>
+                            {matchItem.slice(1).map((group: string, gi: number) => (
+                              <span key={gi} style={styles.group}>Group ${gi + 1}: {group}</span>
+                            ))}
+                          </div>
+                        )}
+                        <div style={styles.matchMeta}>
+                          Index: {matchItem.index} | Length: {matchItem[0].length}
                         </div>
-                      )}
-                      <div style={styles.matchMeta}>
-                        Index: {match.index} | Length: {match[0].length}
                       </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            ) : (
-              <div style={styles.placeholder}>Enter a test string to see matches</div>
-            )}
+                    ))}
+                  </div>
+                );
+              } else if (!error && matches && matches.length === 0) {
+                return <div style={styles.noMatch}>No matches found</div>;
+              } else {
+                return <div style={styles.placeholder}>Enter a test string to see matches</div>;
+              }
+            })()}
           </div>
         </div>
       </div>
@@ -415,9 +418,9 @@ export default function RegexGenerator() {
           <div style={styles.refItem}><kbd>*</kbd> 0 or more</div>
           <div style={styles.refItem}><kbd>+</kbd> 1 or more</div>
           <div style={styles.refItem}><kbd>?</kbd> 0 or 1</div>
-          <div style={styles.refItem}><kbd>{n}</kbd> Exactly n</div>
-          <div style={styles.refItem}><kbd>{n,}</kbd> n or more</div>
-          <div style={styles.refItem}><kbd>{n,m}</kbd> n to m times</div>
+          <div style={styles.refItem}><kbd>{`{n}`}</kbd> Exactly n</div>
+          <div style={styles.refItem}><kbd>{`{n,}`}</kbd> n or more</div>
+          <div style={styles.refItem}><kbd>{`{n,m}`}</kbd> n to m times</div>
           <div style={styles.refItem}><kbd>()</kbd> Capture group</div>
           <div style={styles.refItem}><kbd>(?:)</kbd> Non-capturing group</div>
           <div style={styles.refItem}><kbd>|</kbd> Alternation (OR)</div>
@@ -427,8 +430,8 @@ export default function RegexGenerator() {
           <div style={styles.refItem}><kbd>\B</kbd> Non-word boundary</div>
           <div style={styles.refItem}><kbd>(?=)</kbd> Positive lookahead</div>
           <div style={styles.refItem}><kbd>(?!)</kbd> Negative lookahead</div>
-          <div style={styles.refItem}><kbd>(?<=)</kbd> Positive lookbehind</div>
-          <div style={styles.refItem}><kbd>(?<!)</kbd> Negative lookbehind</div>
+          <div style={styles.refItem}><kbd>{`(?<=)`}</kbd> Positive lookbehind</div>
+          <div style={styles.refItem}><kbd>{`(?<!)`}</kbd> Negative lookbehind</div>
         </div>
       </div>
     </div>

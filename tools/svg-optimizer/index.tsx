@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 interface OptimizationOptions {
   removeComments: boolean;
@@ -138,7 +138,7 @@ function optimizeSVG(svg: string, options: OptimizationOptions): { optimized: st
         .trim();
       return `<style>${minified}</style>`;
     });
-    result = result.replace(/style="([^"]*)"/gi, (match, styles) => {
+    result = result.replace(/style="([^"]*)"/gi, (_match, styles) => {
       const minified = styles
         .replace(/\s+/g, ' ')
         .replace(/\s*([:;])\s*/g, '$1')
@@ -208,18 +208,18 @@ function optimizeSVG(svg: string, options: OptimizationOptions): { optimized: st
     });
     
     // Convert rgb() to hex
-    result = result.replace(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi, (match: string, r: string, g: string, b: string) => {
+    result = result.replace(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi, (_match: string, r: string, g: string, b: string) => {
       return '#' + [r, g, b].map(v => parseInt(v).toString(16).padStart(2, '0')).join('');
     });
     
     // Convert rgba() to hex (ignore alpha for simplicity)
-    result = result.replace(/rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*[\d.]+\)\)/gi, (match: string, r: string, g: string, b: string) => {
+    result = result.replace(/rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*[\d.]+\)\)/gi, (_match: string, r: string, g: string, b: string) => {
       return '#' + [r, g, b].map(v => parseInt(v).toString(16).padStart(2, '0')).join('');
     });
   }
   
   if (options.convertPathData) {
-    result = result.replace(/d="([^"]*)"/gi, (match: string, pathData: string) => {
+    result = result.replace(/d="([^"]*)"/gi, (_match: string, pathData: string) => {
       let optimized = pathData
         .replace(/\s+/g, ' ')
         .replace(/\s*([MmZzLlHhVvCcSsQqTtAa])\s*/g, '$1')
