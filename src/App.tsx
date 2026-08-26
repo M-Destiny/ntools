@@ -805,6 +805,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/color-namer').then(m => ({ default: m.default }))),
     icon: '🏷️',
     shortcut: 'N'
+  },
+  'aspect-ratio-calculator': {
+    name: 'aspect-ratio-calculator',
+    displayName: 'Aspect Ratio Calculator',
+    description: 'Calculate dimensions, convert ratios, and find matching resolutions with presets for common screen sizes.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/aspect-ratio-calculator').then(m => ({ default: m.default }))),
+    icon: '📐',
+    shortcut: 'A'
+  },
+  'base64-encoder': {
+    name: 'base64-encoder',
+    displayName: 'Base64 Encoder/Decoder',
+    description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default }))),
+    icon: '🔐',
+    shortcut: 'B'
   }
   };
 
