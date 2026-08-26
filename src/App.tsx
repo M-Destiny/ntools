@@ -859,7 +859,25 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
       component: lazy(() => import('../tools/svg-optimizer').then(m => ({ default: m.default }))),
       icon: '📐',
       shortcut: 'O'
-    }
+    },
+  'csv-to-markdown': {
+    name: 'csv-to-markdown',
+    displayName: 'CSV to Markdown',
+    description: 'Convert CSV data to Markdown table format with configurable options including header handling and column alignment.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-markdown').then(m => ({ default: m.default }))),
+    icon: '📋',
+    shortcut: 'M'
+  },
+  'csv-to-tsv': {
+    name: 'csv-to-tsv',
+    displayName: 'CSV to TSV',
+    description: 'Convert CSV data to Tab-Separated Values (TSV) with support for different delimiters and quoted fields.',
+    category: 'Data',
+    component: lazy(() => import('../tools/csv-to-tsv').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'T'
+  }
   };
 
 // Derived data

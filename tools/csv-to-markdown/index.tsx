@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function CsvToMarkdown() {
   const [csvInput, setCsvInput] = useState('');
@@ -101,7 +101,7 @@ export default function CsvToMarkdown() {
         center: ':---:',
         right: '---:'
       };
-      markdown += '| ' + colWidths.map((w, i) => alignChars[alignment].padEnd(w)).join(' | ') + ' |\n';
+      markdown += '| ' + colWidths.map((w) => alignChars[alignment].padEnd(w)).join(' | ') + ' |\\n';
 
       // Data rows
       dataRows.forEach(row => {
