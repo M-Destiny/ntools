@@ -16,7 +16,6 @@ function beautifyCSS(input: string, options: BeautifyOptions): string {
   let indentLevel = 0;
   let inSelector = false;
   let inRule = false;
-  let buffer = '';
   
   // First, normalize whitespace
   let normalized = input
@@ -131,7 +130,7 @@ export default function CssBeautifier() {
     padding: 10px;
   }
 }`);
-  const [output, setOutput] = useState('');
+
   const [options, setOptions] = useState<BeautifyOptions>({
     indentSize: 2,
     indentChar: 'space',

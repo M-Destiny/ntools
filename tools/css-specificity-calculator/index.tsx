@@ -56,10 +56,6 @@ export default function CSSSpecificityCalculator() {
   }, [input]);
 
   const calculateSpecificity = (selector: string): { specificity: [number, number, number]; parts: { ids: string[]; classes: string[]; elements: string[] } } => {
-    const ids: string[] = [];
-    const classes: string[] = [];
-    const elements: string[] = [];
-
     // Split by commas for selector groups, take the highest specificity
     const selectorGroups = selector.split(',').map(s => s.trim());
     
@@ -89,16 +85,15 @@ export default function CSSSpecificityCalculator() {
     let workingSelector = selector.replace(/::[a-z-]+/gi, ' *');
     
     // Handle pseudo-classes (:hover, :focus, :nth-child, etc.) - they count as classes
-    workingSelector = workingSelector.replace(/:([a-z-]+)(\([^)]*\))?/gi, (match, name) => {
-      if (name && !['not', 'is', 'where', 'has', 'host', 'host-context', 'slotted'].includes(name.toLowerCase())) {
-        classes.push(':' + name);
-      }
-      return ' *';
-    });
+        workingSelector = workingSelector.replace(/:([a-z-]+)(\\([^)]*\\))?/gi, (_match, name) => {
+          if (name && !['not', 'is', 'where', 'has', 'host', 'host-context', 'slotted'].includes(name.toLowerCase())) {
+            classes.push(':' + name);
+          }
+          return ' *';
+        });
 
     // Handle :not(), :is(), :where(), :has() - their contents contribute to specificity
-    workingSelector = workingSelector.replace(/(?::not|:is|:where|:has)\(([^)]+)\)/gi, (match, inner) => {
-      const innerResult = calculateSingleSelectorSpecificity(inner);
+    workingSelector = workingSelector.replace(/(?::not|:is|:where|:has)\(([^)]+)\)/gi, (match) => {
       // :where() has 0 specificity, others take the max of their arguments
       if (match.toLowerCase().startsWith(':where')) {
         return ' *';
@@ -128,12 +123,12 @@ export default function CSSSpecificityCalculator() {
     // Find element selectors (tag names)
     // This is simplified - we look for word boundaries that aren't preceded by . # [ :
     const elementPattern = /\b([a-z][a-z0-9-]*)\b/gi;
-    let match;
-    while ((match = elementPattern.exec(workingSelector)) !== null) {
-      const tag = match[1].toLowerCase();
+    let elementMatch;
+    while ((elementMatch = elementPattern.exec(workingSelector)) !== null) {
+      const tag = elementMatch[1].toLowerCase();
       // Skip pseudo-classes and known non-elements
-      const before = workingSelector[match.index - 1];
-      const after = workingSelector[match.index + match[0].length];
+      const before = workingSelector[elementMatch.index - 1];
+      const after = workingSelector[elementMatch.index + elementMatch[0].length];
       if (before !== '.' && before !== '#' && before !== '[' && before !== ':' && 
           after !== '(' && after !== '[' && !['not', 'is', 'where', 'has', 'hover', 'focus', 'active', 'visited', 'link', 'first-child', 'last-child', 'nth-child', 'nth-of-type', 'first-of-type', 'last-of-type', 'only-child', 'only-of-type', 'empty', 'root', 'target', 'enabled', 'disabled', 'checked', 'optional', 'required', 'valid', 'invalid', 'in-range', 'out-of-range', 'read-only', 'read-write', 'placeholder-shown', 'default', 'focus-visible', 'focus-within'].includes(tag)) {
         elements.push(tag);
@@ -299,7 +294,7 @@ export default function CSSSpecificityCalculator() {
                 <li><strong>Classes, Attributes, Pseudo-classes</strong> — .class, [attr], :hover (0,1,0)</li>
                 <li><strong>Elements, Pseudo-elements</strong> — div, ::before (0,0,1)</li>
                 <li><strong>Universal selector</strong> — * (0,0,0)</li>
-                <li><strong>Combinators</strong> — +, >, ~, space (0,0,0)</li>
+                <li><strong>Combinators</strong> — +, {'>'}, ~, space (0,0,0)</li>
               </ul>
               <h5>Special Cases</h5>
               <ul>
