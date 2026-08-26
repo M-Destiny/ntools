@@ -877,6 +877,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/csv-to-tsv').then(m => ({ default: m.default }))),
     icon: '🔄',
     shortcut: 'T'
+  },
+  'dockerignore-generator': {
+    name: 'dockerignore-generator',
+    displayName: 'Dockerignore Generator',
+    description: 'Generate comprehensive .dockerignore files with 30+ patterns for dependencies, build outputs, IDE files, logs, test coverage, environment files, Docker files, Git, and secrets.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/dockerignore-generator').then(m => ({ default: m.default }))),
+    icon: '🐳',
+    shortcut: 'D'
+  },
+  'editorconfig-generator': {
+    name: 'editorconfig-generator',
+    displayName: 'EditorConfig Generator',
+    description: 'Generate consistent EditorConfig files for cross-editor coding style. Choose from presets (Web, Python, Go, Rust, Minimal) or customize indentation, line endings, charset, and whitespace settings.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/editorconfig-generator').then(m => ({ default: m.default }))),
+    icon: '⚙️',
+    shortcut: 'E'
   }
   };
 
