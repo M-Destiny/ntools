@@ -931,6 +931,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/graphql-playground').then(m => ({ default: m.default }))),
     icon: '🔌',
     shortcut: 'G'
+  },
+  'html-to-text': {
+    name: 'html-to-text',
+    displayName: 'HTML to Text',
+    description: 'Extract clean plain text from HTML. Removes tags, decodes entities, preserves links and formatting structure.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/html-to-text').then(m => ({ default: m.default }))),
+    icon: '📄',
+    shortcut: 'H'
+  },
+  'json-schema-generator': {
+    name: 'json-schema-generator',
+    displayName: 'JSON Schema Generator',
+    description: 'Build JSON Schema (Draft 7) visually with support for nested objects, arrays, enums, and validation rules.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/json-schema-generator').then(m => ({ default: m.default }))),
+    icon: '📋',
+    shortcut: 'J'
   }
   };
 

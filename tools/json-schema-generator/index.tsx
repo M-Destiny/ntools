@@ -18,8 +18,6 @@ const TYPE_OPTIONS = [
   'string', 'number', 'integer', 'boolean', 'array', 'object', 'null'
 ];
 
-const STRING_FORMATS = ['', 'date', 'date-time', 'email', 'uuid', 'uri', 'ipv4', 'ipv6', 'hostname', 'json-pointer', 'regex'];
-
 const INITIAL_FIELD: SchemaField = {
   id: crypto.randomUUID(),
   name: '',
@@ -105,7 +103,6 @@ export default function JsonSchemaGenerator() {
     switch (field.type) {
       case 'string': {
         base.type = 'string';
-        const format = field.pattern ? undefined : field.enumValues ? undefined : undefined;
         if (field.enumValues) {
           const vals = field.enumValues.split(',').map(v => v.trim()).filter(v => v);
           if (vals.length > 0) base.enum = vals;

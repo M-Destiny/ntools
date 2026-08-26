@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function HtmlToText() {
   const [html, setHtml] = useState(`<!DOCTYPE html>
@@ -122,12 +122,12 @@ export default function HtmlToText() {
 
     // Handle links - keep text with URL
     if (options.keepLinks) {
-      text = text.replace(/<a\s+[^>]*href\s*=\s*["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi, (match, url, content) => {
+      text = text.replace(/<a\s+[^>]*href\s*=\s*["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi, (_match, url, content) => {
         const innerText = content.replace(/<[^>]*>/g, '');
         return `${innerText} (${url})`;
       });
     } else {
-      text = text.replace(/<a\s+[^>]*>([\s\S]*?)<\/a>/gi, (match, content) => {
+      text = text.replace(/<a\s+[^>]*>([\s\S]*?)<\/a>/gi, (_match, content) => {
         return content.replace(/<[^>]*>/g, '');
       });
     }
@@ -212,14 +212,11 @@ export default function HtmlToText() {
         '&raquo;': '»',
         '&times;': '×',
         '&divide;': '÷',
-        '&frac14;': '¼',
-        '&frac12;': '½',
         '&frac34;': '¾',
         '&deg;': '°',
         '&plusmn;': '±',
         '&micro;': 'µ',
         '&para;': '¶',
-        '&middot;': '·',
       };
 
       Object.entries(entities).forEach(([entity, char]) => {
@@ -227,12 +224,12 @@ export default function HtmlToText() {
       });
 
       // Numeric entities
-      text = text.replace(/&#(\d+);/g, (match, num) => {
-        return String.fromCharCode(parseInt(num, 10));
-      });
-      text = text.replace(/&#x([0-9a-f]+);/gi, (match, hex) => {
-        return String.fromCharCode(parseInt(hex, 16));
-      });
+            text = text.replace(/&#(\\d+);/g, (_match, num) => {
+              return String.fromCharCode(parseInt(num, 10));
+            });
+            text = text.replace(/&#x([0-9a-f]+);/gi, (_match, hex) => {
+              return String.fromCharCode(parseInt(hex, 16));
+            });
     }
 
     // Clean up whitespace
