@@ -293,6 +293,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '👁️',
     shortcut: 'B'
   },
+  'color-contrast': {
+    name: 'color-contrast',
+    displayName: 'Color Contrast Checker',
+    description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default }))),
+    icon: '♿',
+    shortcut: 'A'
+  },
+  'color-palette-extractor': {
+    name: 'color-palette-extractor',
+    displayName: 'Color Palette Extractor',
+    description: 'Upload an image to extract its dominant color palette. Get hex, RGB, HSL values and CSS variables.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-palette-extractor').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'X'
+  },
   'css-beautifier': {
     name: 'css-beautifier',
     displayName: 'CSS Beautifier',
@@ -464,6 +482,60 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔄',
     shortcut: 'M'
   },
+  'markdown-editor': {
+    name: 'markdown-editor',
+    displayName: 'Markdown Editor',
+    description: 'Live markdown editor with preview, word count, character count, auto-save to localStorage, and export to Markdown or HTML.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-editor').then(m => ({ default: m.default }))),
+    icon: '📝',
+    shortcut: 'E'
+  },
+  'markdown-formatter': {
+    name: 'markdown-formatter',
+    displayName: 'Markdown Formatter',
+    description: 'Format and beautify Markdown with configurable line width, indentation, and wrapping options. Normalize headings, lists, tables, and code blocks.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-formatter').then(m => ({ default: m.default }))),
+    icon: '💅',
+    shortcut: 'F'
+  },
+  'markdown-to-csv': {
+    name: 'markdown-to-csv',
+    displayName: 'Markdown to CSV',
+    description: 'Convert Markdown tables to CSV format with configurable delimiters and header options.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-to-csv').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'C'
+  },
+  'markdown-to-pdf': {
+    name: 'markdown-to-pdf',
+    displayName: 'Markdown to PDF',
+    description: 'Convert Markdown to PDF with customizable styling, page options, and table of contents.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-to-pdf').then(m => ({ default: m.default }))),
+    icon: '📄',
+    shortcut: 'P'
+  },
+  'markdown-to-text': {
+    name: 'markdown-to-text',
+    displayName: 'Markdown to Text',
+    description: 'Extract plain text from Markdown by removing all formatting. Get clean text with word and character counts.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/markdown-to-text').then(m => ({ default: m.default }))),
+    icon: '📄',
+    shortcut: 'X'
+  },
+  'mock-data-generator': {
+    name: 'mock-data-generator',
+    displayName: 'Mock Data Generator',
+    description: 'Generate realistic mock data for testing, development, and prototyping. Define custom schemas with 15+ data types and export as JSON, CSV, SQL, or YAML.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/mock-data-generator').then(m => ({ default: m.default }))),
+    icon: '🎲',
+    shortcut: 'K'
+  },
   'css-animation-generator': {
     name: 'css-animation-generator',
     displayName: 'CSS Animation Generator',
@@ -490,6 +562,42 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/emoji-picker').then(m => ({ default: m.default }))),
     icon: '😀',
     shortcut: 'E'
+  },
+  'number-to-words': {
+    name: 'number-to-words',
+    displayName: 'Number to Words Converter',
+    description: 'Convert numbers to their English word representation. Supports integers, decimals, negatives, and large numbers up to quintillions.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/number-to-words').then(m => ({ default: m.default }))),
+    icon: '🔤',
+    shortcut: 'W'
+  },
+  'openapi-to-typescript': {
+    name: 'openapi-to-typescript',
+    displayName: 'OpenAPI to TypeScript',
+    description: 'Convert OpenAPI 3.x specifications to TypeScript interfaces, type aliases, or Zod validation schemas with full support for complex schemas, enums, arrays, and nested objects.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/openapi-to-typescript').then(m => ({ default: m.default }))),
+    icon: '🔷',
+    shortcut: 'O'
+  },
+  'openapi-validator': {
+    name: 'openapi-validator',
+    displayName: 'OpenAPI Validator',
+    description: 'Validate OpenAPI 3.x and Swagger 2.0 specifications with detailed error reporting and best practice warnings.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/openapi-validator').then(m => ({ default: m.default }))),
+    icon: '✅',
+    shortcut: 'V'
+  },
+  'regex-visualizer': {
+    name: 'regex-visualizer',
+    displayName: 'Regex Visualizer',
+    description: 'A powerful tool to test, debug, and visualize regular expressions with real-time highlighting and detailed explanations.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/regex-visualizer').then(m => ({ default: m.default }))),
+    icon: '👁️',
+    shortcut: 'Z'
   },
   'markdown-linter': {
     name: 'markdown-linter',
@@ -634,6 +742,42 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/xml-formatter').then(m => ({ default: m.default }))),
     icon: '📄',
     shortcut: 'X'
+  },
+  'token-counter': {
+    name: 'token-counter',
+    displayName: 'Token Counter',
+    description: 'Count tokens, words, characters, and estimate API costs for various LLM models including GPT-4, GPT-3.5, Claude 3, Llama 3, and custom estimations.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/token-counter').then(m => ({ default: m.default }))),
+    icon: '🔢',
+    shortcut: 'K'
+  },
+  'toml-to-xml': {
+    name: 'toml-to-xml',
+    displayName: 'TOML to XML',
+    description: 'Convert TOML configuration to XML format. Supports tables, arrays, inline tables, and nested structures.',
+    category: 'Data',
+    component: lazy(() => import('../tools/toml-to-xml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'X'
+  },
+  'toml-to-yaml': {
+    name: 'toml-to-yaml',
+    displayName: 'TOML to YAML',
+    description: 'Convert TOML configuration to YAML format. Supports sections, arrays, and various value types with real-time conversion.',
+    category: 'Data',
+    component: lazy(() => import('../tools/toml-to-yaml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'Y'
+  },
+  'toml-yaml-converter': {
+    name: 'toml-yaml-converter',
+    displayName: 'TOML ↔ YAML Converter',
+    description: 'Bidirectional conversion between TOML and YAML formats with real-time validation, example data, and copy to clipboard.',
+    category: 'Data',
+    component: lazy(() => import('../tools/toml-yaml-converter').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'Y'
   },
   'css-minifier': {
     name: 'css-minifier',
@@ -914,6 +1058,42 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '🔄',
     shortcut: 'Y'
   },
+  'xml-to-csv': {
+    name: 'xml-to-csv',
+    displayName: 'XML to CSV',
+    description: 'Convert XML data to CSV format with configurable row selector, delimiter options, and optional header row.',
+    category: 'Data',
+    component: lazy(() => import('../tools/xml-to-csv').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'X'
+  },
+  'xml-to-json': {
+    name: 'xml-to-json',
+    displayName: 'XML to JSON',
+    description: 'Convert XML to JSON with configurable attribute handling, type parsing, text node naming, and whitespace control.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/xml-to-json').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'X'
+  },
+  'xml-to-yaml': {
+    name: 'xml-to-yaml',
+    displayName: 'XML to YAML',
+    description: 'Convert XML to YAML with configurable parsing options including trim, explicit arrays, and attribute handling.',
+    category: 'Data',
+    component: lazy(() => import('../tools/xml-to-yaml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'Y'
+  },
+  'xml-validator': {
+    name: 'xml-validator',
+    displayName: 'XML Validator',
+    description: 'Validate XML syntax and view parsed structure with syntax highlighting. Check for well-formedness and structure.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/xml-validator').then(m => ({ default: m.default }))),
+    icon: '✅',
+    shortcut: 'V'
+  },
   'env-editor': {
     name: 'env-editor',
     displayName: 'Env Editor',
@@ -949,6 +1129,87 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/json-schema-generator').then(m => ({ default: m.default }))),
     icon: '📋',
     shortcut: 'J'
+  },
+  'json-to-markdown': {
+    name: 'json-to-markdown',
+    displayName: 'JSON to Markdown',
+    description: 'Convert JSON data to readable Markdown. Supports nested objects, arrays as tables, and configurable output formatting.',
+    category: 'Data',
+    component: lazy(() => import('../tools/json-to-markdown').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'M'
+  },
+  'json-to-yaml': {
+    name: 'json-to-yaml',
+    displayName: 'JSON to YAML',
+    description: 'Convert JSON to YAML with configurable indentation. Supports nested objects, arrays, and all JSON types.',
+    category: 'Data',
+    component: lazy(() => import('../tools/json-to-yaml').then(m => ({ default: m.default }))),
+    icon: '🔄',
+    shortcut: 'Y'
+  },
+  'json-tree-viewer': {
+      name: 'json-tree-viewer',
+      displayName: 'JSON Tree Viewer',
+      description: 'An interactive JSON tree viewer and editor. Parse, visualize, search, and edit JSON data in a collapsible tree structure with path copying, value editing, and structural modifications.',
+      category: 'Data',
+      component: lazy(() => import('../tools/json-tree-viewer').then(m => ({ default: m.default }))),
+      icon: '🌳',
+      shortcut: 'T'
+    },
+    'yaml-to-csv': {
+      name: 'yaml-to-csv',
+      displayName: 'YAML to CSV',
+      description: 'Convert YAML data to CSV format with custom delimiters and optional header row. Supports proper CSV escaping.',
+      category: 'Data',
+      component: lazy(() => import('../tools/yaml-to-csv').then(m => ({ default: m.default }))),
+      icon: '🔄',
+      shortcut: 'C'
+    },
+    'yaml-to-json': {
+      name: 'yaml-to-json',
+      displayName: 'YAML to JSON',
+      description: 'Convert YAML to JSON with pretty or compact output. Supports all YAML types including anchors, aliases, and multi-line strings.',
+      category: 'Data',
+      component: lazy(() => import('../tools/yaml-to-json').then(m => ({ default: m.default }))),
+      icon: '🔄',
+      shortcut: 'J'
+    },
+    'yaml-to-xml': {
+      name: 'yaml-to-xml',
+      displayName: 'YAML to XML',
+      description: 'Convert YAML to XML with configurable root element, pretty printing, headless mode, and XML declaration.',
+      category: 'Data',
+      component: lazy(() => import('../tools/yaml-to-xml').then(m => ({ default: m.default }))),
+      icon: '🔄',
+      shortcut: 'X'
+    },
+    'yaml-validator': {
+      name: 'yaml-validator',
+      displayName: 'YAML Validator',
+      description: 'Validate YAML syntax and view parsed structure with syntax highlighting. Check for well-formedness and structure.',
+      category: 'Developer',
+      component: lazy(() => import('../tools/yaml-validator').then(m => ({ default: m.default }))),
+      icon: '✅',
+      shortcut: 'V'
+    },
+  'color-contrast': {
+    name: 'color-contrast',
+    displayName: 'Color Contrast Checker',
+    description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default }))),
+    icon: '♿',
+    shortcut: 'A'
+  },
+  'color-palette-extractor': {
+    name: 'color-palette-extractor',
+    displayName: 'Color Palette Extractor',
+    description: 'Upload an image to extract its dominant color palette. Get hex, RGB, HSL values and CSS variables.',
+    category: 'Design',
+    component: lazy(() => import('../tools/color-palette-extractor').then(m => ({ default: m.default }))),
+    icon: '🎨',
+    shortcut: 'X'
   }
   };
 
