@@ -293,24 +293,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '👁️',
     shortcut: 'B'
   },
-  'color-contrast': {
-    name: 'color-contrast',
-    displayName: 'Color Contrast Checker',
-    description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default }))),
-    icon: '♿',
-    shortcut: 'A'
-  },
-  'color-palette-extractor': {
-    name: 'color-palette-extractor',
-    displayName: 'Color Palette Extractor',
-    description: 'Upload an image to extract its dominant color palette. Get hex, RGB, HSL values and CSS variables.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-palette-extractor').then(m => ({ default: m.default }))),
-    icon: '🎨',
-    shortcut: 'X'
-  },
   'css-beautifier': {
     name: 'css-beautifier',
     displayName: 'CSS Beautifier',
@@ -1184,36 +1166,18 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
       icon: '🔄',
       shortcut: 'X'
     },
-    'yaml-validator': {
-      name: 'yaml-validator',
-      displayName: 'YAML Validator',
-      description: 'Validate YAML syntax and view parsed structure with syntax highlighting. Check for well-formedness and structure.',
-      category: 'Developer',
-      component: lazy(() => import('../tools/yaml-validator').then(m => ({ default: m.default }))),
-      icon: '✅',
-      shortcut: 'V'
-    },
-  'color-contrast': {
-    name: 'color-contrast',
-    displayName: 'Color Contrast Checker',
-    description: 'Check WCAG contrast ratios between foreground and background colors. Test AA and AAA compliance for normal and large text.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-contrast').then(m => ({ default: m.default }))),
-    icon: '♿',
-    shortcut: 'A'
-  },
-  'color-palette-extractor': {
-    name: 'color-palette-extractor',
-    displayName: 'Color Palette Extractor',
-    description: 'Upload an image to extract its dominant color palette. Get hex, RGB, HSL values and CSS variables.',
-    category: 'Design',
-    component: lazy(() => import('../tools/color-palette-extractor').then(m => ({ default: m.default }))),
-    icon: '🎨',
-    shortcut: 'X'
-  }
-  };
+      'yaml-validator': {
+          name: 'yaml-validator',
+          displayName: 'YAML Validator',
+          description: 'Validate YAML syntax and view parsed structure with syntax highlighting. Check for well-formedness and structure.',
+          category: 'Developer',
+          component: lazy(() => import('../tools/yaml-validator').then(m => ({ default: m.default }))),
+          icon: '✅',
+          shortcut: 'V'
+        }
+      };
 
-// Derived data
+    // Derived data
 const CATEGORIES = ['All', ...new Set(Object.values(TOOL_REGISTRY).map(t => t.category))];
 const TOOL_COUNT = Object.keys(TOOL_REGISTRY).length;
 
