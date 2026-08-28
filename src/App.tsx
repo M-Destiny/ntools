@@ -50,6 +50,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📐',
     shortcut: 'A'
   },
+  'base64-decoder': {
+    name: 'base64-decoder',
+    displayName: 'Base64 Decoder',
+    description: 'Decode Base64 strings back to text or binary. Auto-detects encoding and handles UTF-8 safely.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/base64-decoder').then(m => ({ default: m.default }))),
+    icon: '🔓',
+    shortcut: 'B'
+  },
+  'base64-encoder': {
+    name: 'base64-encoder',
+    displayName: 'Base64 Encoder/Decoder',
+    description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
+    category: 'Utility',
+    component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default }))),
+    icon: '🔐',
+    shortcut: 'B'
+  },
   'css-variable-generator': {
     name: 'css-variable-generator',
     displayName: 'CSS Variable Generator',
@@ -220,24 +238,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/diff-checker').then(m => ({ default: m.default }))),
     icon: '🔀',
     shortcut: 'D'
-  },
-  'base64-encoder': {
-    name: 'base64-encoder',
-    displayName: 'Base64 Encoder/Decoder',
-    description: 'Encode text or files to Base64, decode Base64 back to text. Supports UTF-8 and binary files with file upload.',
-    category: 'Utility',
-    component: lazy(() => import('../tools/base64-encoder').then(m => ({ default: m.default }))),
-    icon: '🔐',
-    shortcut: 'B'
-  },
-  'base64-decoder': {
-    name: 'base64-decoder',
-    displayName: 'Base64 Decoder',
-    description: 'Decode Base64 strings back to text or binary. Auto-detects encoding and handles UTF-8 safely.',
-    category: 'Utility',
-    component: lazy(() => import('../tools/base64-decoder').then(m => ({ default: m.default }))),
-    icon: '🔓',
-    shortcut: 'B'
   },
   'cron-builder': {
     name: 'cron-builder',
