@@ -49,16 +49,11 @@ clients = { data = [["gamma", "delta"], [1, 2]], hosts = ["alpha", "omega"] }`);
   }, []);
 
   const tomlToXml = useCallback((toml: string): ConversionResult => {
-    try {
-      // Simple TOML parser for basic structures
-      const lines = toml.split('\n');
-      let result = '';
-      let currentPath: string[] = [];
-      let inArray = false;
-      let arrayName = '';
-      let arrayItems: string[] = [];
+      try {
+        // Simple TOML parser for basic structures
+        const lines = toml.split('\\n');
 
-      const writeValue = (path: string[], key: string, value: any): string => {
+        const writeValue = (path: string[], key: string, value: any): string => {
         const fullPath = [...path, key];
         const tagName = fullPath.join('-');
         

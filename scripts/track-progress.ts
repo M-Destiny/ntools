@@ -40,11 +40,24 @@ try {
   const commits = gitLog.trim().split('\n').filter(Boolean);
   const toolCommits = commits.filter(c => c.includes('feat(tools): add'));
   
-  // Each feat(tools): add commit adds 2 tools
-  const toolsBuiltToday = toolCommits.length * 2;
+  // Parse tool names from commit messages and deduplicate
+  const allTools = new Set<string>();
+  for (const commit of toolCommits) {
+    const msg = commit.split(' ').slice(1).join(' '); // Remove hash, keep message
+    const match = msg.match(/feat\(tools\): add (.+?) (?:to registry|$)/);
+    if (match) {
+      const toolStr = match[1];
+      // Split by comma or " and " and trim
+      const tools = toolStr.split(/,| and /).map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+      for (const tool of tools) {
+        allTools.add(tool);
+      }
+    }
+  }
+  const toolsBuiltToday = allTools.size;
   
   console.log(`Today's tool commits: ${toolCommits.length}`);
-  console.log(`Tools built today: ${toolsBuiltToday}`);
+  console.log(`Unique tools built today: ${toolsBuiltToday}`);
   console.log(`Progress claims: ${progress.tools_built_today}`);
   
   if (toolsBuiltToday !== progress.tools_built_today) {

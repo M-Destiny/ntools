@@ -392,7 +392,7 @@ query GetUser {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .tool-container {
           padding: 1rem;
           max-width: 1400px;
