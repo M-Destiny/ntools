@@ -284,6 +284,24 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '♿',
     shortcut: 'A'
   },
+  'css-minifier': {
+    name: 'css-minifier',
+    displayName: 'CSS Minifier',
+    description: 'Minify CSS by removing comments, whitespace, and optimizing syntax. Reduces file size for faster loading.',
+    category: 'Developer',
+    component: lazy(() => import('../tools/css-minifier').then(m => ({ default: m.default }))),
+    icon: '📦',
+    shortcut: 'C'
+  },
+  'css-shadow-generator': {
+    name: 'css-shadow-generator',
+    displayName: 'CSS Shadow Generator',
+    description: 'Create complex box-shadow effects with multiple layers. Build subtle depth, neon glows, or brutalist shadows visually.',
+    category: 'Design',
+    component: lazy(() => import('../tools/css-shadow-generator').then(m => ({ default: m.default }))),
+    icon: '🌫️',
+    shortcut: 'S'
+  },
   'color-blind-simulator': {
     name: 'color-blind-simulator',
     displayName: 'Color Blindness Simulator',
@@ -427,15 +445,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/license-generator').then(m => ({ default: m.default }))),
     icon: '📄',
     shortcut: 'L'
-  },
-  'css-shadow-generator': {
-    name: 'css-shadow-generator',
-    displayName: 'CSS Shadow Generator',
-    description: 'Create complex box-shadow effects with multiple layers. Build subtle depth, neon glows, or brutalist shadows visually.',
-    category: 'Design',
-    component: lazy(() => import('../tools/css-shadow-generator').then(m => ({ default: m.default }))),
-    icon: '🌫️',
-    shortcut: 'S'
   },
   'json-to-typescript': {
     name: 'json-to-typescript',
@@ -760,15 +769,6 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     component: lazy(() => import('../tools/toml-yaml-converter').then(m => ({ default: m.default }))),
     icon: '🔄',
     shortcut: 'Y'
-  },
-  'css-minifier': {
-    name: 'css-minifier',
-    displayName: 'CSS Minifier',
-    description: 'Minify CSS with configurable options. Remove whitespace, comments, and optimize selectors.',
-    category: 'Developer',
-    component: lazy(() => import('../tools/css-minifier').then(m => ({ default: m.default }))),
-    icon: '📦',
-    shortcut: 'C'
   },
   'image-compressor': {
     name: 'image-compressor',
