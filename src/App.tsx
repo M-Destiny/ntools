@@ -1103,7 +1103,7 @@ const TOOL_REGISTRY: Record<string, ToolMeta> = {
     icon: '📄',
     shortcut: 'H'
   },
-  'json-schema-generator': {
+    'json-schema-generator': {
     name: 'json-schema-generator',
     displayName: 'JSON Schema Generator',
     description: 'Build JSON Schema (Draft 7) visually with support for nested objects, arrays, enums, and validation rules.',
