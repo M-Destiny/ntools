@@ -1,8 +1,8 @@
 {
   "date": "2026-08-30",
   "daily_target": 24,
-  "tools_built_today": 0,
-  "total_tools": 128,
+  "tools_built_today": 2,
+  "total_tools": 130,
   "log": [
     {
       "tool": "auto-correction",
@@ -75,18 +75,6 @@
       "note": "New day (2026-08-29). Git history confirms 0 feat(tools) commits today. Progress.json tools_built_today corrected from 8 to 0. On schedule (expected 0 at 00:01). Total tools in repo: 132."
     },
     {
-      "tool": "css-variable-generator",
-      "timestamp": "2026-08-29T04:07:45.795516Z",
-      "commit": "590ea46",
-      "status": "built"
-    },
-    {
-      "tool": "csv-to-json",
-      "timestamp": "2026-08-29T04:07:45.795516Z",
-      "commit": "590ea46",
-      "status": "built"
-    },
-    {
       "tool": "catch-up",
       "timestamp": "2026-08-29T06:01:00.000Z",
       "commit": "none",
@@ -107,7 +95,7 @@
       "timestamp": "2026-08-28T00:01:00.000Z",
       "commit": "none",
       "status": "verified",
-      "note": "New day (2026-08-28). Git history confirms 0 feat(tools) commits today. Progress.json tools_built_today corrected from 4 to 0. On schedule (expected 0 at 00:01). Total tools in repo: 128."
+      "note": "New day (2026-08-28). Git history confirms 0 feat(tools) commits today. Progress.json tools_built_today corrected from 4 to 0. On schedule (expected 0 at 00:01). Total tools in repo: 130."
     },
     {
       "tool": "base64-decoder",
@@ -849,6 +837,18 @@
       "status": "triggered",
       "reason": "behind_schedule",
       "note": "tools_built_today=4 vs expected=12 at 12:00. Daily build ntools-daily-build already scheduled by scheduler (next run 14:00)."
+    },
+    {
+      "tool": "csv-to-xml",
+      "timestamp": "2026-08-30T02:00:00.000Z",
+      "commit": "625599e",
+      "status": "built"
+    },
+    {
+      "tool": "csv-to-yaml",
+      "timestamp": "2026-08-30T02:00:00.000Z",
+      "commit": "625599e",
+      "status": "built"
     },
     {
       "tool": "auto-correction",
