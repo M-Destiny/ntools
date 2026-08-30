@@ -113,7 +113,7 @@ export default function XmlValidator() {
             {attrs.length > 0 && <span> {attrs}</span>}
             <span className="xml-punct">{GREATER_THAN}</span>
           </div>
-          {children.map((child, i) => renderXmlNode(child, indent + 1))}
+          {children.map((child, _i) => renderXmlNode(child, indent + 1))}
           <div>
             <span className="xml-punct">{spaces}{LESS_THAN}{SLASH}</span>
             <span className="xml-tag">{node.nodeName}</span>

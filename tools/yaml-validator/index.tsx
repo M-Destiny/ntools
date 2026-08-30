@@ -102,7 +102,8 @@ metadata:
     if (typeof data === 'object') {
       const entries = Object.entries(data as Record<string, unknown>);
       if (entries.length === 0) {
-        return <span className="yaml-brace">{spaces}{{ }}</span>;
+        const emptyObj = '{}';
+        return <span className="yaml-brace">{spaces}{emptyObj}</span>;
       }
       return (
         <div>
@@ -167,7 +168,7 @@ metadata:
             <span>Lines: {input.split('\n').length}</span>
           </div>
 
-          {parsedData && (
+          {parsedData !== null && (
             <div className="parsed-preview">
               <h4>Parsed Structure</h4>
               <div className="parsed-content">{renderParsed(parsedData)}</div>

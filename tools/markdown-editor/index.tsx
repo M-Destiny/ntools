@@ -152,7 +152,7 @@ export default function MarkdownEditor() {
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .tool-container {
           padding: 1rem;
           max-width: 1400px;

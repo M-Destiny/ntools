@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { parseStringPromise, Builder } from 'xml2js';
+import { Builder } from 'xml2js';
 import * as yaml from 'yaml';
 
 export default function YamlToXml() {
@@ -7,7 +7,16 @@ export default function YamlToXml() {
   const [output, setOutput] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [options, setOptions] = useState({
+  const [options, setOptions] = useState<{
+    rootName: string;
+    headless: boolean;
+    renderOpts: {
+      pretty: boolean;
+      indent: string;
+      newline: string;
+    };
+    xmldec: { version: string; encoding: string };
+  }>({
     rootName: 'root',
     headless: false,
     renderOpts: {
@@ -101,7 +110,7 @@ export default function YamlToXml() {
   const toggleXmlDec = () => {
     setOptions(prev => ({
       ...prev,
-      xmldec: prev.xmldec ? null : { version: '1.0', encoding: 'UTF-8' }
+      xmldec: { version: '1.0', encoding: 'UTF-8' }
     }));
     if (input.trim()) convert();
   };

@@ -30,10 +30,10 @@ export default function RegexVisualizer() {
 
   const highlightedString = useMemo(() => {
     if (!regex || matches.length === 0) return <span>{testString}</span>;
-    
+
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    
+
     matches.forEach((match, i) => {
       if (match.index > lastIndex) {
         parts.push(<span key={`text-${i}`}>{testString.slice(lastIndex, match.index)}</span>);
@@ -45,11 +45,11 @@ export default function RegexVisualizer() {
       );
       lastIndex = match.index + match[0].length;
     });
-    
+
     if (lastIndex < testString.length) {
       parts.push(<span key="tail">{testString.slice(lastIndex)}</span>);
     }
-    
+
     return <span>{parts}</span>;
   }, [testString, matches, regex]);
 
@@ -230,14 +230,14 @@ export default function RegexVisualizer() {
       <div className="panel mt-4">
         <h3>Quick Reference</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\d</code> - Digit</div>
-          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\w</code> - Word char</div>
-          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\s</code> - Whitespace</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\\d</code> - Digit</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\\w</code> - Word char</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\\s</code> - Whitespace</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>.</code> - Any char</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>*</code> - 0 or more</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>+</code> - 1 or more</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>?</code> - 0 or 1</div>
-          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>{n}</code> - Exactly n</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>{`\\{n\\}`}</code> - Exactly n</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>[abc]</code> - Char class</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>[^abc]</code> - Negated</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>(abc)</code> - Capture group</div>
@@ -245,7 +245,7 @@ export default function RegexVisualizer() {
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>|</code> - Alternation</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>^</code> - Start</div>
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>$</code> - End</div>
-          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\b</code> - Word boundary</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded"><code>\\b</code> - Word boundary</div>
         </div>
       </div>
     </div>

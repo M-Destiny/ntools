@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { ToolLayout, TextareaInput, SelectInput, Toast } from '@/components/ui';
 
 interface ValidationResult {
   valid: boolean;
@@ -51,7 +50,6 @@ export default function OpenAPIValidator() {
     // Basic YAML parser for demo - in production use js-yaml
     const lines = yaml.split('\n');
     const result: any = {};
-    let currentKey = '';
     let currentObj = result;
     const stack: any[] = [result];
 
@@ -242,23 +240,100 @@ export default function OpenAPIValidator() {
     setFormat('json');
   };
 
-  return (
-    <ToolLayout
-      title="OpenAPI Validator"
-      description="Validate OpenAPI 3.x and Swagger 2.0 specifications. Checks structure, required fields, paths, components, and best practices."
+  const Container = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+    <div className={`max-w-6xl mx-auto p-6 ${className}`}>{children}</div>
+  );
+
+  const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+    <div className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 ${className}`}>{children}</div>
+  );
+
+  const Button = ({ children, onClick, disabled, variant = 'primary', className = '' }: { 
+    children: React.ReactNode; 
+    onClick?: () => void; 
+    disabled?: boolean;
+    variant?: 'primary' | 'secondary' | 'destructive';
+    className?: string;
+  }) => (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`px-4 py-2 rounded-md font-medium transition-colors ${className} ${
+        variant === 'primary' ? 'bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50' :
+        variant === 'secondary' ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600' :
+        'bg-red-600 text-white hover:bg-red-700 disabled:opacity-50'
+      }`}
     >
+      {children}
+    </button>
+  );
+
+  const Select = ({ value, onChange, options, label }: { 
+    value: string; 
+    onChange: (v: string) => void; 
+    options: { value: string; label: string }[];
+    label: string;
+  }) => (
+    <div className="space-y-2">
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        {options.map(opt => (
+          <option key={opt.value} value={opt.value}>{opt.label}</option>
+        ))}
+      </select>
+    </div>
+  );
+
+  const Textarea = ({ value, onChange, placeholder, rows = 10, label, fontFamily }: { 
+    value: string; 
+    onChange: (v: string) => void; 
+    placeholder: string;
+    rows?: number;
+    label: string;
+    fontFamily?: string;
+  }) => (
+    <div className="space-y-2">
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        rows={rows}
+        className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 ${fontFamily ? 'font-mono' : ''}`}
+      />
+    </div>
+  );
+
+  const ToastComponent = ({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) => (
+    <div className={`fixed bottom-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg text-white flex items-center gap-3 ${type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}>
+      <span>{message}</span>
+      <button onClick={onClose} className="text-white hover:text-gray-200">✕</button>
+    </div>
+  );
+
+  return (
+    <Container>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">OpenAPI Validator</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Validate OpenAPI 3.x and Swagger 2.0 specifications. Checks structure, required fields, paths, components, and best practices.</p>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="space-y-4">
-          <SelectInput
+        <Card className="space-y-4">
+          <Select
             label="Format"
             value={format}
-            onChange={setFormat}
+            onChange={(v: string) => setFormat(v as 'json' | 'yaml')}
             options={[
               { value: 'json', label: 'JSON' },
               { value: 'yaml', label: 'YAML' }
             ]}
           />
-          <TextareaInput
+          <Textarea
             label="OpenAPI Specification"
             value={specInput}
             onChange={setSpecInput}
@@ -267,38 +342,26 @@ export default function OpenAPIValidator() {
             fontFamily="monospace"
           />
           <div className="flex gap-3">
-            <button
-              onClick={validateSpec}
-              disabled={loading}
-              className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 transition-colors"
-            >
+            <Button onClick={validateSpec} disabled={loading} className="flex-1">
               {loading ? 'Validating...' : 'Validate'}
-            </button>
-            <button
-              onClick={loadExample}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors"
-            >
+            </Button>
+            <Button onClick={loadExample} variant="secondary">
               Load Example
-            </button>
-            <button
-              onClick={clearAll}
-              className="px-4 py-2 bg-destructive text-destructive-foreground rounded-md hover:bg-destructive/90 transition-colors"
-            >
+            </Button>
+            <Button onClick={clearAll} variant="destructive">
               Clear
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
 
-        <div className="space-y-4">
+        <Card className="space-y-4">
           {result && (
             <div className="space-y-4">
               <div className={`p-4 rounded-md border ${
-                result.valid ? 'border-green-500/30 bg-green-500/10' : 'border-red-500/30 bg-red-500/10'
+                result.valid ? 'border-green-500/30 bg-green-500/10 dark:bg-green-900/20' : 'border-red-500/30 bg-red-500/10 dark:bg-red-900/20'
               }`}>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className={`text-xl`}>
-                    {result.valid ? '✓' : '✗'}
-                  </span>
+                  <span className="text-xl">{result.valid ? '✓' : '✗'}</span>
                   <strong className={result.valid ? 'text-green-400' : 'text-red-400'}>
                     {result.valid ? 'Valid Specification' : 'Invalid Specification'}
                   </strong>
@@ -326,24 +389,21 @@ export default function OpenAPIValidator() {
               </div>
 
               <div className="flex gap-3">
-                <button
-                  onClick={copyResult}
-                  className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors"
-                >
+                <Button onClick={copyResult} variant="secondary">
                   Copy Result
-                </button>
+                </Button>
               </div>
             </div>
           )}
 
           {!result && (
-            <div className="p-8 text-center text-muted-foreground border-2 border-dashed rounded-lg">
+            <div className="p-8 text-center text-gray-500 dark:text-gray-400 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
               <p className="text-lg mb-2">Enter a specification and click Validate</p>
               <p className="text-sm">Supports OpenAPI 3.x and Swagger 2.0 in JSON or YAML format</p>
             </div>
           )}
 
-          <div className="p-4 bg-muted/50 rounded-lg text-sm text-muted-foreground">
+          <div className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-sm text-gray-600 dark:text-gray-400">
             <h4 className="font-medium mb-2">Validation Checks:</h4>
             <ul className="list-disc list-inside space-y-1">
               <li>OpenAPI/Swagger version field</li>
@@ -356,16 +416,16 @@ export default function OpenAPIValidator() {
               <li>Security scheme references</li>
             </ul>
           </div>
-        </div>
+        </Card>
       </div>
 
       {toast && (
-        <Toast
+        <ToastComponent
           message={toast.message}
           type={toast.type}
           onClose={() => setToast(null)}
         />
       )}
-    </ToolLayout>
+    </Container>
   );
 }

@@ -173,7 +173,7 @@ export default function OpenApiToTypescript() {
       return refName;
     }
 
-    const { type, format, enum: enumValues, items, anyOf, oneOf, allOf, nullable, properties } = schema;
+    const { type, format, enum: enumValues, items, anyOf, oneOf, allOf, properties } = schema;
 
     if (anyOf || oneOf) {
       const types = (anyOf || oneOf).map((s: any) => schemaToTsType(s, allSchemas, propName));

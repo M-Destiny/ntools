@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { parseStringPromise, Builder } from 'xml2js';
+import { parseStringPromise } from 'xml2js';
 import * as yaml from 'yaml';
 
 export default function XmlToYaml() {

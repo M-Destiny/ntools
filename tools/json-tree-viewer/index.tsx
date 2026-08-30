@@ -154,11 +154,6 @@ export default function JsonTreeViewer() {
     }
   };
 
-  const cancelEdit = () => {
-    setEditMode(null);
-    setSelectedPath(null);
-  };
-
   const updateJsonAtPath = (obj: JsonValue, path: string, newValue: JsonValue): JsonValue => {
     if (path === '') return newValue;
     
@@ -168,8 +163,6 @@ export default function JsonTreeViewer() {
     
     for (let i = 0; i < parts.length - 1; i++) {
       const part = parts[i];
-      const nextPart = parts[i + 1];
-      const isNextArrayIndex = !isNaN(Number(nextPart));
       
       if (Array.isArray(current)) {
         current = current[Number(part)];

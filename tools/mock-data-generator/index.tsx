@@ -265,7 +265,7 @@ export default function MockDataGenerator() {
       }).join('\n');
       out = rows;
     } else if (format === 'yaml') {
-      out = data.map((row, i) => {
+      out = data.map((row, _i) => {
         const lines = fields.map(f => {
           const val = row[f.name];
           if (typeof val === 'string') return `  ${f.name}: "${val}"`;
@@ -330,7 +330,7 @@ export default function MockDataGenerator() {
           <h3>Schema Definition</h3>
           <div className="fields-list">
             {fields.map(field => {
-              const typeInfo = DATA_TYPES.find(t => t.id === field.type);
+              DATA_TYPES.find(t => t.id === field.type);
               return (
                 <div key={field.id} className="field-row">
                   <input

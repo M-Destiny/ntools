@@ -101,7 +101,7 @@ export default function JsonToMarkdown() {
       if (arrayAsTable && obj.length > 0 && obj[0] && typeof obj[0] === 'object') {
         md += generateTable(obj, doEscape, tableMaxRows);
       } else {
-        md += obj.slice(0, tableMaxRows).map((v, i) => 
+        md += obj.slice(0, tableMaxRows).map((v, _i) => 
           `${'  '.repeat(depth)}- ${formatValue(v, doEscape)}`
         ).join('\n');
         if (obj.length > tableMaxRows) {

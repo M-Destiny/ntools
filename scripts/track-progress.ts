@@ -44,7 +44,7 @@ try {
   const allTools = new Set<string>();
   for (const commit of toolCommits) {
     const msg = commit.split(' ').slice(1).join(' '); // Remove hash, keep message
-    const match = msg.match(/feat\(tools\): add (.+?) (?:to registry|$)/);
+    const match = msg.match(/feat\(tools\): add (.+?)(?: to registry|$)/);
     if (match) {
       const toolStr = match[1];
       // Split by comma or " and " and trim

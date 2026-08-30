@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface MarkdownToPDFProps {
   markdown: string;
   onExport: (pdfBlob: Blob) => void;
 }
 
-export default function MarkdownToPDF({ markdown, onExport }: MarkdownToPDFProps) {
+function MarkdownToPDFInner({ markdown, onExport }: MarkdownToPDFProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -41,15 +41,15 @@ export default function MarkdownToPDF({ markdown, onExport }: MarkdownToPDFProps
     setError(null);
 
     try {
-      const { default: pdfMake } = await import('pdfmake/build/pdfmake');
-      const pdfFonts = (await import('pdfmake/build/vfs_fonts')).default;
+      const pdfMake = (await import('pdfmake/build/pdfmake')).default;
+      const vfs = (await import('pdfmake/build/vfs_fonts')).default;
       
-      pdfMake.vfs = pdfFonts.pdfMake.vfs;
+      pdfMake.addVirtualFileSystem(vfs);
 
       // Convert markdown to pdfmake content structure
       const content = parseMarkdownToPdfMake(markdown);
 
-      const docDefinition = {
+      const docDefinition: any = {
         content,
         defaultStyle: {
           fontSize: 11,
@@ -69,9 +69,7 @@ export default function MarkdownToPDF({ markdown, onExport }: MarkdownToPDFProps
       };
 
       const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-      const pdfBlob = await new Promise<Blob>((resolve) => {
-        pdfDocGenerator.getBlob((blob: Blob) => resolve(blob));
-      });
+      const pdfBlob = await pdfDocGenerator.getBlob();
 
       onExport(pdfBlob);
     } catch (err) {
@@ -180,7 +178,6 @@ export default function MarkdownToPDF({ markdown, onExport }: MarkdownToPDFProps
 
   const parseInlineFormatting = (text: string): any => {
     const parts: any[] = [];
-    let remaining = text;
     const regex = /(\*\*.+?\*\*|\*.+?\*|`.+?`|\[.+?\]\(.+?\))/g;
     let match;
     let lastIndex = 0;
@@ -237,4 +234,57 @@ export default function MarkdownToPDF({ markdown, onExport }: MarkdownToPDFProps
       </div>
     </div>
   );
+}
+
+export default function MarkdownToPDF() {
+  const markdown = `# Welcome to Markdown to PDF
+
+## Features
+
+- **Converts** markdown to PDF
+- **Customizable** styling and page options
+- **Table of contents** support
+- **Live preview** before export
+
+### Lists
+
+1. First item
+2. Second item
+   - Nested item
+   - Another nested item
+3. Third item
+
+### Code
+
+\`\`\`javascript
+function hello() {
+  console.log("Hello, World!");
+}
+\`\`\`
+
+### Links and Images
+
+[Visit Example](https://example.com)
+
+![Alt text](https://example.com/image.png)
+
+### Blockquotes
+
+> This is a blockquote
+> With multiple lines
+
+---
+
+**Bold** and *italic* text`;
+
+  const handleExport = (pdfBlob: Blob) => {
+    const url = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'document.pdf';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return <MarkdownToPDFInner markdown={markdown} onExport={handleExport} />;
 }
